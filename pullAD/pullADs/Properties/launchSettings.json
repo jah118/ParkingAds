@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "pullADs": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  pullads:
+    image: ${DOCKER_REGISTRY-}pullads
+    build:
+      context: .
+      dockerfile: pullADs/Dockerfile
