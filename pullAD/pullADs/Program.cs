@@ -1,28 +1,39 @@
-﻿using pullADs.util;
-using System;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using pullADs.util;
 using System.Timers;
-
-
+using Microsoft.Extensions.Configuration;
 
 namespace pullADs
 {
-    internal class Program
+    public class Program
     {
         private static System.Timers.Timer aTimer;
 
-        private static async Task Main(string[] args)
+        public static ApiSettings apiSettings { get; private set; }
+
+        private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             //setups
-            var startupVars = new Startup();  // add interval timer var to json 
+            
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false);
+
+            IConfiguration config = builder.Build();
+
+            apiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
+            
+            //var startupVars = new Startup(); // add interval timer var to json 
+            
             AdPullService adPullService = new AdPullService();
 
-            DataHandling(startupVars, adPullService);
+            DataHandling(apiSettings, adPullService);
 
             // The code runs when a event from OnTimedEvent in SetTimer gets raised.
             // which is delegate that runs from an event from Timer.Elapsed
-            SetTimer(startupVars.ApiSettings.TimerInterval1min);
+            SetTimer(apiSettings.TimerInterval1min);
 
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
             Console.WriteLine("Press 'S' to stop");
@@ -36,7 +47,6 @@ namespace pullADs
             aTimer.Dispose();
 
             Console.WriteLine("Terminating the application...");
-
         }
 
         private static void SetTimer(int interval)
@@ -49,16 +59,18 @@ namespace pullADs
             aTimer.Enabled = true;
         }
 
-        private static async Task DataHandling(Startup startupVars, AdPullService adPullService)
+        // private static async Task DataHandling(Startup startupVars, AdPullService adPullService)
+        private static async Task DataHandling(ApiSettings startupVars, AdPullService adPullService)
         {
             Console.WriteLine("pull");
 
-            await adPullService!.GetAd(startupVars.ApiSettings.AdURL);
+            await adPullService!.GetAd(startupVars.AdURL);
 
             Console.WriteLine("data formating ");
 
             Console.WriteLine("rabbit send ");
         }
+
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",

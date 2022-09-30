@@ -2,9 +2,9 @@
 
 namespace pullADs.util
 {
-    public class Startup
+    public class AppSettingsHandler
     {
-        public Startup()
+        public AppSettingsHandler()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
