@@ -8,20 +8,20 @@ using System.Timers;
 namespace pullADs.util
 {
     //https://docs.microsoft.com/en-us/dotnet/api/system.timers.timer?view=net-6.0
-    public class cTimer
+    public class CTimer
     {
-        private static System.Timers.Timer aTimer;
+        private static System.Timers.Timer _aTimer;
 
         private static void SetTimer()
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(2000);
+            _aTimer = new System.Timers.Timer(2000);
             // Hook up the Elapsed event for the timer. 
 
 
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            _aTimer.Elapsed += OnTimedEvent;
+            _aTimer.AutoReset = true;
+            _aTimer.Enabled = true;
         }
 
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)

@@ -1,13 +1,11 @@
 ﻿namespace pullADs.util
 {
-    public class ApiSettings
+    public class ApiSettings : IApiSettings
     {
-        public string AdURL { get; set; }
-        public string redisConn { get; set; }
+        public string? AdUrl { get; set; }
+        public string? RedisConn { get; set; }
 
-        public int TimerInterval1min { get; set; }
-        public int TimerInterval2min { get; set; }
-
-
+        public int TimerInterval1 { get; private set; } = 60000;
+        public int TimerInterval2 { get; private set; } = 120000;
     }
 }

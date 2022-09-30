@@ -2,11 +2,15 @@
 {
     public class AdItem
     {
-        public AdItem(string content)
+        public AdItem()
+        {
+        }
+
+        public AdItem(string content) : this()
         {
             Content = content;
         }
 
-        public string Content { get; set; }
+        private string Content { get; set; } = null!;
     }
 }

@@ -6,34 +6,35 @@ using Microsoft.Extensions.Configuration;
 
 namespace pullADs
 {
-    public class Program
+    public static class Program
     {
-        private static System.Timers.Timer aTimer;
+        private static System.Timers.Timer _aTimer = null!;
 
-        public static ApiSettings apiSettings { get; private set; }
+        private static ApiSettings ApiSettings { get; set; } = null!;
 
         private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             //setups
             
+            // TODO change over to class based setup with interface and DI.   
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false);
 
             IConfiguration config = builder.Build();
 
-            apiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
+            ApiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
             
             //var startupVars = new Startup(); // add interval timer var to json 
             
             AdPullService adPullService = new AdPullService();
 
-            DataHandling(apiSettings, adPullService);
+            DataHandling(ApiSettings, adPullService);
 
             // The code runs when a event from OnTimedEvent in SetTimer gets raised.
             // which is delegate that runs from an event from Timer.Elapsed
-            SetTimer(apiSettings.TimerInterval1min);
+            SetTimer(ApiSettings.TimerInterval1);
 
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
             Console.WriteLine("Press 'S' to stop");
@@ -43,8 +44,8 @@ namespace pullADs
                 // do something
             }
 
-            aTimer.Stop();
-            aTimer.Dispose();
+            _aTimer.Stop();
+            _aTimer.Dispose();
 
             Console.WriteLine("Terminating the application...");
         }
@@ -52,11 +53,11 @@ namespace pullADs
         private static void SetTimer(int interval)
         {
             // Create a timer with a two second interval.
-            aTimer = new System.Timers.Timer(interval);
+            _aTimer = new System.Timers.Timer(interval);
             // Hook up the Elapsed event for the timer. 
-            aTimer.Elapsed += OnTimedEvent;
-            aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            _aTimer.Elapsed += OnTimedEvent;
+            _aTimer.AutoReset = true;
+            _aTimer.Enabled = true;
         }
 
         // private static async Task DataHandling(Startup startupVars, AdPullService adPullService)
@@ -64,7 +65,10 @@ namespace pullADs
         {
             Console.WriteLine("pull");
 
-            await adPullService!.GetAd(startupVars.AdURL);
+            if (startupVars.AdUrl != null)
+            {
+                var temp = await adPullService!.GetAd(startupVars.AdUrl);
+            }
 
             Console.WriteLine("data formating ");
 
@@ -75,6 +79,9 @@ namespace pullADs
         {
             Console.WriteLine("The Elapsed event was raised at {0:HH:mm:ss.fff}",
                 e.SignalTime);
+            //TODO: add support for getting data on the envent. 
+           // DataHandling(ApiSettings, adPullService);
+
         }
     }
 }
