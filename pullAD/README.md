@@ -1,4 +1,4 @@
-﻿## TO RUN 
+## TO RUN 
 docker-compose -d -f project-services-compose.yml up -d 
 
 

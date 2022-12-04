@@ -1,0 +1,73 @@
+version: "3.9"
+services:
+  seq:
+    # SeQ is a framework for logging of exceptions etc
+    container_name: ParkingAds.SeQ
+    image: datalust/seq:latest
+    restart: unless-stopped
+    ports:
+      - 8081:80
+      - 5341:5341
+    environment:
+      - ACCEPT_EULA=Y
+  smtp4dev:
+    # development time email server and client, easy to test sending emails
+    container_name: ParkingAds.Smtp4dev
+    image: rnwood/smtp4dev:latest
+    ports:
+      - 8082:80
+      - 26:25
+  parkingservice:
+    container_name: ParkingAds.ParkingService
+    image: brhv/psuparkingservice
+    restart: unless-stopped
+    ports:
+      - 8083:80    
+  adservice:
+    container_name: ParkingAds.AdService
+    image: brhv/psuadservice
+    restart: unless-stopped
+    ports:
+      - 8084:80
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    ports:
+      - '6379:6379'
+    # Denne command sikre at hvis redis restarts, vil der hvert 20 sek blive gemt til disk
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    #entrypoint: redis-server --appendonly yes --requirepass $REDIS_PASSWORD --maxmemory 512mb --maxmemory-policy allkeys-lru
+    volumes: 
+      - cache:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+  rabbitmq:
+    container_name: rabbitmq
+    image: 'rabbitmq:3.10-management'
+    ports: 
+        - 5672:5672 
+        - 15672:15672 # communication with the web management API 
+    volumes:
+        # data persistence
+        - /docker_conf/rabbitmq/data/:/var/lib/rabbitmq/
+        # data mapping -> host: container
+        # queues and messages data of the container will be stored on the host
+    # environment:
+        # - RABBITMQ_DEFAULT_USER = aq  dmin
+        # - RABBITMQ_DEFAULT_PASS = passw123
+    restart: always
+
+volumes:
+  logs-folder:
+      name: ${log_rabbitmq_management}
+      driver: local
+  cache:
+    driver: local
+
+
+
+
+
+
+
