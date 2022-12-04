@@ -1,9 +1,9 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 using pullADs.Facade;
-using pullADs.util;
 using RabbitMQ.Client;
 using Serilog;
+using System.Threading;
 
 namespace pullADs;
 
@@ -21,20 +21,25 @@ public class RabbitMQProducer : IMessageProducer
         Log.Information("Started producing");
         // TODO USE app settings
         var factory = new ConnectionFactory {HostName = _appSettings.RabbitConn};
-        var connection = factory.CreateConnection();
+        using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
         channel.QueueDeclare(queue: "ads",
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);
 
         var json = JsonConvert.SerializeObject(message);
         var body = Encoding.UTF8.GetBytes(json);
+        
+        var properties = channel.CreateBasicProperties();
+        properties.Persistent = true;
+        
         channel.BasicPublish(exchange: "",
             routingKey: "ads",
-            basicProperties: null,
+            basicProperties: properties,
             body: body);
+        //TODO DO better log msg 
         Log.Information(" [x] Sent {0}", message);
     }
 }
