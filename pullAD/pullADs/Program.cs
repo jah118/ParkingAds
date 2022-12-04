@@ -30,32 +30,42 @@ public static class Program
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateLogger();
-
-        Log.Logger.Information("Application Starting");
-
-        _adPullService = new AdPullService();
-
-        // Gets called here so TimerInterval does not block or delay a quick start by waiting
-        DataHandling();
-
-        // The code runs when a event from OnTimedEvent in SetTimer gets raised.
-        // which is delegate that runs from an event from Timer.Elapsed
-        SetTimer(_appSettings.TimerInterval1); // <-------- use this one 
-        // SetTimer(1000);
-
-        Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
-        Console.WriteLine("Press 'S' to stop");
-
-        //TODO Do something better like wtf is this.....
-        while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
+        try
         {
-            // do something
+            Log.Logger.Information("Application Starting");
+
+            _adPullService = new AdPullService();
+
+            // Gets called here so TimerInterval does not block or delay a quick start by waiting
+            DataHandling();
+
+            // The code runs when a event from OnTimedEvent in SetTimer gets raised.
+            // which is delegate that runs from an event from Timer.Elapsed
+            SetTimer(_appSettings.TimerInterval1); // <-------- use this one 
+            // SetTimer(1000);
+
+            Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
+            Console.WriteLine("Press 'S' to stop");
+
+            //TODO Do something better like wtf is this.....
+            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
+            {
+                // do something
+            }
+
+            _aTimer.Stop();
+            _aTimer.Dispose();
+
+            Console.WriteLine("Terminating the application...");
         }
-
-        _aTimer.Stop();
-        _aTimer.Dispose();
-
-        Console.WriteLine("Terminating the application...");
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Application terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
     }
 
     /// <summary>
