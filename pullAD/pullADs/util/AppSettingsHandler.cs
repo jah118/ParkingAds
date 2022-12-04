@@ -1,20 +1,22 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Serilog;
 
+
+//DI, Seri
 namespace pullADs.util
 {
-    public class AppSettingsHandler
+    public class AppSettingsHandler : IAppSettingsHandler
     {
-        public AppSettingsHandler()
+        public AppSettingsHandler(IConfigurationBuilder builder)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false);
+            builder.SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, true);
 
             IConfiguration config = builder.Build();
 
             ApiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
         }
 
-        public ApiSettings ApiSettings { get; private set; }
+        public ApiSettings ApiSettings { get; set; }
     }
 }

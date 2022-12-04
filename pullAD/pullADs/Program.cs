@@ -3,30 +3,47 @@ using System.IO;
 using pullADs.util;
 using System.Timers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace pullADs
 {
     public static class Program
     {
         private static System.Timers.Timer _aTimer = null!;
-
+        
         private static ApiSettings ApiSettings { get; set; } = null!;
 
         private static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
             //setups
-            
-            // TODO change over to class based setup with interface and DI.   
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false);
 
-            IConfiguration config = builder.Build();
-
-            ApiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
+            var builder = new ConfigurationBuilder();
+            AppSettingsHandler appSetup = new AppSettingsHandler(builder);
+            ApiSettings = appSetup.ApiSettings;
             
-            //var startupVars = new Startup(); // add interval timer var to json 
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(builder.Build())
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
+            Log.Logger.Information("Application Starting");
+
+            
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddTransient<IAdPullService, AdPullService>();
+                })
+                .UseSerilog()
+                .Build();
+
+            var svc = ActivatorUtilities.CreateInstance<AdPullService>(host.Services);
+            //svc.Run();
+            
             
             AdPullService adPullService = new AdPullService();
 
