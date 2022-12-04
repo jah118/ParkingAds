@@ -1,10 +1,11 @@
-﻿using Serilog;
+﻿using pullADs.Facade;
+using Serilog;
 
 namespace pullADs
 {
     public class AdPullService : IAdPullService
     {
-        public async Task<AdItem> GetAd(string baseUrl)
+        public async Task<IAdItem> GetAd(string baseUrl)
         {
             // This could be null and is being used with that in mind 
             var adItem = new AdItem();

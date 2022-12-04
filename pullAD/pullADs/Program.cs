@@ -1,11 +1,6 @@
-﻿using System;
-using System.IO;
-using pullADs.util;
+﻿using pullADs.util;
 using System.Timers;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using pullADs.Facade;
 using Serilog;
 
@@ -15,10 +10,9 @@ namespace pullADs
     {
         private static System.Timers.Timer _aTimer = null!;
 
-        private static IApiSettings _apiSettings;
+        private static IAppSettings _appSettings;
         private static IAdPullService _adPullService;
-        private static IAppSettingsHandler _settingsHandler;
-        private static readonly IMessageProducer _messagePublisher;
+        private static IMessageProducer _messagePublisher;
 
         private static void Main(string[] args)
         {
@@ -26,8 +20,9 @@ namespace pullADs
 
             //setups
             var builder = new ConfigurationBuilder();
-            _settingsHandler = new AppSettingsHandler(builder);
-            _apiSettings = _settingsHandler.ApiSettings;
+            IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
+            _appSettings = settingsHandler.AppSettings;
+            _messagePublisher = new RabbitMQProducer(settingsHandler.AppSettings);
 
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(builder.Build())
@@ -44,12 +39,13 @@ namespace pullADs
 
             // The code runs when a event from OnTimedEvent in SetTimer gets raised.
             // which is delegate that runs from an event from Timer.Elapsed
-            // SetTimer(_apiSettings.TimerInterval1);    // <-------- use this one 
-            SetTimer(500);
+            SetTimer(_appSettings.TimerInterval1);    // <-------- use this one 
+            // SetTimer(1000);
 
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
             Console.WriteLine("Press 'S' to stop");
 
+            //TODO Do something better like wtf is this.....
             while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
             {
                 // do something
@@ -61,6 +57,10 @@ namespace pullADs
             Console.WriteLine("Terminating the application...");
         }
 
+        /// <summary>
+        ///  Set a TIMER THAT FIRES AN INTERVAL AT A GIVEN INTERVAL
+        /// </summary>
+        /// <param name="interval"></param>
         private static void SetTimer(int interval)
         {
             // Create a timer with a two second interval.
@@ -72,21 +72,23 @@ namespace pullADs
             _aTimer.Enabled = true;
         }
 
-        // private static async Task DataHandling(Startup startupVars, AdPullService adPullService)
+        /// <summary>
+        /// Gets Ad data, format it and send it to msg queue
+        /// </summary>
         private static async Task DataHandling()
         {
             try
             {
                 Log.Information("Started DataHandling");
 
-                // TODO: this needs to be check on startup maybe use fleunt validation later on settings class
-                if (string.IsNullOrEmpty(_apiSettings.AdUrl))
+                // TODO this needs to be check on startup maybe use fleunt validation later on settings class
+                if (string.IsNullOrEmpty(_appSettings.AdUrl))
                 {
                     Log.Error("Configuration ERROR, No URI TO GET ads FROM got: {Uri}",
-                        _apiSettings.AdUrl);
+                        _appSettings.AdUrl);
                 }
 
-                var data = await _adPullService!.GetAd(_apiSettings.AdUrl);
+                var data = await _adPullService!.GetAd(_appSettings.AdUrl);
                 Log.Logger.Information("AD data: {@Data}", data);
 
                 if (data.Success is false || string.IsNullOrEmpty(data.Content))
@@ -97,30 +99,30 @@ namespace pullADs
                 else
                 {
                     Console.WriteLine("data formating ");
-                    Console.WriteLine(_apiSettings.AdUrl.ToString());
+                    Console.WriteLine(_appSettings.AdUrl.ToString());
                     // TODO do formatining and paring 
+                    // TODO check format by regex like "<[a-zA-Z]+ [a-zA-Z]+='[^']*'>[a-zA-Z]+ [a-zA-Z]+</[a-zA-Z]+>"
                     var formattedData = data;
 
                     Console.WriteLine("rabbit send ");
-                    
+
                     _messagePublisher.SendMessage(formattedData);
-                    
                 }
             }
             catch (Exception e)
             {
-                //TODO do some smart error handling like change the Timer interval, alert after 5 retries, that service is dead  
+                //TODO: Maybe add two try catch to separate error handling logic for pull method and msg producer 
+                //TODO: do some smart error handling like change the Timer interval, alert after 5 retries, that service is dead  
                 Console.WriteLine(e);
                 Log.Error("Exception Hit------------ ");
             }
         }
 
+
         private static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
-            Log.Logger.Information("The Elapsed event was raised at {0:HH:mm:ss.fff}",
+            Log.Information("The Elapsed event was raised at {0:HH:mm:ss.fff}",
                 e.SignalTime);
-
-            //TODO: add support for getting data on the envent. 
             DataHandling();
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace pullADs
+﻿using pullADs.Facade;
+
+namespace pullADs
 {
     public class AdItem : IAdItem
     {

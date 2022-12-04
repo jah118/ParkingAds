@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using pullADs.Facade;
 using Serilog;
 
 
@@ -14,9 +15,9 @@ namespace pullADs.util
 
             IConfiguration config = builder.Build();
 
-            ApiSettings = config.GetSection("ApiSettings").Get<ApiSettings>();
+            AppSettings = config.GetSection("ApiSettings").Get<AppSettings>();
         }
 
-        public ApiSettings ApiSettings { get; set; }
+        public AppSettings AppSettings { get; set; }
     }
 }

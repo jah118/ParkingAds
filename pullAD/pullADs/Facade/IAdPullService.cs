@@ -1,6 +1,6 @@
-﻿namespace pullADs;
+﻿namespace pullADs.Facade;
 
 public interface IAdPullService
 {
-    Task<AdItem> GetAd(string baseUrl);
+    Task<IAdItem> GetAd(string baseUrl);
 }

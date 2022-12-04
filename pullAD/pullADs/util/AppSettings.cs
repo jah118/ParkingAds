@@ -1,6 +1,8 @@
-﻿namespace pullADs.util
+﻿using pullADs.Facade;
+
+namespace pullADs.util
 {
-    public class ApiSettings : IApiSettings
+    public class AppSettings : IAppSettings
     {
         public string? AdUrl { get; set; }
         public string? RedisConn { get; set; }

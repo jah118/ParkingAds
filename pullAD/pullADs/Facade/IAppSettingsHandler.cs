@@ -1,6 +1,8 @@
-﻿namespace pullADs.util;
+﻿using pullADs.util;
+
+namespace pullADs.Facade;
 
 public interface IAppSettingsHandler
 {
-    ApiSettings ApiSettings { get; set; }
+    AppSettings AppSettings { get; set; }
 }

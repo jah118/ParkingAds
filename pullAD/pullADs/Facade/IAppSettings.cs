@@ -1,6 +1,6 @@
-﻿namespace pullADs.util;
+﻿namespace pullADs.Facade;
 
-public interface IApiSettings
+public interface IAppSettings
 {
     string? AdUrl { get; set; }
     string? RedisConn { get; set; }
