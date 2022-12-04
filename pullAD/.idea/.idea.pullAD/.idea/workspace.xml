@@ -4,15 +4,8 @@
     <projectFile profileName="pullADs">pullADs/pullADs.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="23f5c627-e1f4-458a-865d-f232d608d368" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pullADs/Facade/IAdPullService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pullADs/Facade/IApiSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/AdItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/AdItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/AdPullService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/AdPullService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/util/ApiSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/util/ApiSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pullADs/util/cTimer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/pullADs/util/cTimer.cs" afterDir="false" />
+    <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/pullADs/TODO" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +13,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ca860fea1234fdab4474cfa1911d325a886a3e2e7692197955e531a9eb8e081/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/db1a2f3394c1931cc084d12fde748c7de38a76c7ecea8ba51bccbbc96eebef23/ElapsedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e329bd4f14a42c5f6951d92d29ba7796e511d77e6a35ab20a5a38f50ba6fd74/HttpResponseMessage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b9ec86353372ef6d4b862ec3552934310c2b674b5b263f7ee508468e028ab84/EventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/69593afc69483659e9373e173c8361fd966106a5d50f639c51b48388ddeb29/Timer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/35234c4686895ab73d4bf9acadd6faf584c5b390ce562edf38838ae596b/ConfigurationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -34,16 +31,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
   <component name="RunManager">
     <configuration name="pullADs" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/pullADs/pullADs.csproj" />
