@@ -2,6 +2,7 @@
 
 using Microsoft.Extensions.Configuration;
 using RedisConsumer.Facade;
+using RedisConsumer.RabbitMQ;
 using RedisConsumer.util;
 using Serilog;
 

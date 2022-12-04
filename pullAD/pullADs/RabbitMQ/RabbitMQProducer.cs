@@ -3,9 +3,8 @@ using Newtonsoft.Json;
 using pullADs.Facade;
 using RabbitMQ.Client;
 using Serilog;
-using System.Threading;
 
-namespace pullADs;
+namespace pullADs.RabbitMQ;
 
 public class RabbitMQProducer : IMessageProducer
 {

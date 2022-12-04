@@ -1,6 +1,7 @@
 ﻿using System.Timers;
 using Microsoft.Extensions.Configuration;
 using pullADs.Facade;
+using pullADs.RabbitMQ;
 using pullADs.util;
 using Serilog;
 using Timer = System.Timers.Timer;

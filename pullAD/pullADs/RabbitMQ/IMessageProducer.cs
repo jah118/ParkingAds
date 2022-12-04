@@ -1,4 +1,4 @@
-﻿namespace pullADs.Facade;
+﻿namespace pullADs.RabbitMQ;
 
 public interface IMessageProducer
 {
