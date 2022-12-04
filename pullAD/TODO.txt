@@ -1,0 +1,7 @@
+Notes 
+
+
+redis er si egen services, der kan lytter på busen efter data 
+
+
+api læser ikke fra bus men fra cahce redis 

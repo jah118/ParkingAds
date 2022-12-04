@@ -1,12 +1,19 @@
-﻿namespace pullADs
+﻿using pullADs.Facade;
+
+namespace pullADs
 {
-    public class AdItem
+    public class AdItem : IAdItem
     {
-        public AdItem(string content)
+        public AdItem()
+        {
+        }
+
+        public AdItem(string content) : this()
         {
             Content = content;
         }
 
-        public string Content { get; set; }
+        public bool Success { get; set; }
+        public string Content { get; set; } = null!;
     }
 }
