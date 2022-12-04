@@ -1,11 +1,13 @@
-﻿namespace pullADs
+﻿using Serilog;
+
+namespace pullADs
 {
     public class AdPullService : IAdPullService
     {
         public async Task<AdItem> GetAd(string baseUrl)
         {
             // This could be null and is being used with that in mind 
-            AdItem adItem = new AdItem();
+            var adItem = new AdItem();
 
             try
             {
@@ -13,34 +15,45 @@
                 using HttpClient client = new HttpClient();
                 // Initiate the Get Request
                 using HttpResponseMessage res = await client.GetAsync(baseUrl);
-                if (res.IsSuccessStatusCode)
+                if (!res.IsSuccessStatusCode)
                 {
-                    //Then get the content from the response in the next using statement, then within it you will get the data, and convert it to a c# object.
-                    using HttpContent content = res.Content;
-                    //Now assign your content to your data variable, by converting into a string using the await keyword.
-                    string dataString = await content.ReadAsStringAsync();
-
-                    //If the data isn't null return log convert the data using newtonsoft JObject Parse class method on the data.
-                    if (!string.IsNullOrEmpty(dataString))
+                    adItem = new AdItem
                     {
-                        //logs data in console,
-                        //TODO check if this needs parsing add output from request to debug log.
-                        Console.WriteLine("data------------{0}", dataString);
-                        adItem = new AdItem(dataString);
-                        return adItem;
-                    }
+                        Success = false
+                    };
+                    Log.Error("unexpected Service response, Received {Data}", res);
 
-                    Console.WriteLine("NO Data----------");
-                    return adItem; //TODO do better than null
+                    return adItem;
                 }
+
+                //Then get the content from the response in the next using statement, then within it you will get the data, and convert it to a c# object.
+                using HttpContent content = res.Content;
+                //Now assign your content to your data variable, by converting into a string using the await keyword.
+                string dataString = await content.ReadAsStringAsync();
+
+                //If the data isn't null return log convert the data using newtonsoft JObject Parse class method on the data.
+                if (!string.IsNullOrEmpty(dataString))
+                {
+                    //logs data in console,
+                    // TODO check if this needs parsing add output from request to debug log.
+                    // TODO Look up serilog structured log and transform data 
+                    Log.Information("Received {$Data}", dataString);
+                    Log.Information("Received {Data}", dataString);
+
+                    adItem = new AdItem(dataString)
+                    {
+                        Success = true
+                    };
+                    return adItem;
+                }
+
+                return adItem;
             }
             catch (Exception exception)
             {
-                Console.WriteLine("Exception Hit------------"); //changes this over to seq data logging
-                Console.WriteLine(exception);
+                Log.Error("Exception Hit------------ {$Data}", exception);
+                throw;
             }
-
-            return adItem;
         }
     }
 }

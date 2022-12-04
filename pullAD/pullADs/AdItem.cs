@@ -1,6 +1,6 @@
 ﻿namespace pullADs
 {
-    public class AdItem
+    public class AdItem : IAdItem
     {
         public AdItem()
         {
@@ -11,6 +11,7 @@
             Content = content;
         }
 
-        private string Content { get; set; } = null!;
+        public bool Success { get; set; }
+        public string Content { get; set; } = null!;
     }
 }
