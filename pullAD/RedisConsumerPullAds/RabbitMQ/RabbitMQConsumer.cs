@@ -1,12 +1,10 @@
 ﻿using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RedisConsumer.Facade;
+using RedisConsumerPullAds.Facade;
 using Serilog;
-using System.Threading;
 
-
-namespace RedisConsumer.RabbitMQ;
+namespace RedisConsumerPullAds.RabbitMQ;
 
 public class RabbitMQConsumer : IMessageConsumer
 {
@@ -23,13 +21,13 @@ public class RabbitMQConsumer : IMessageConsumer
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
 
-        channel.QueueDeclare("ads",
-            durable: true,
-            exclusive: false,
-            autoDelete: false,
-            arguments: null);
+        channel.QueueDeclare(_appSettings.RabbitChannelRedisAds,
+            true,
+            false,
+            false,
+            null);
 
-        channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+        channel.BasicQos(0, 1, false);
         Log.Information(" [*] Waiting for messages.");
 
 
@@ -44,11 +42,11 @@ public class RabbitMQConsumer : IMessageConsumer
 
             // Note: it is possible to access the channel via
             //       ((EventingBasicConsumer)sender).Model here
-            channel.BasicAck(deliveryTag: eventArgs.DeliveryTag, multiple: false);
+            channel.BasicAck(eventArgs.DeliveryTag, false);
         };
-        channel.BasicConsume(queue: "orders",
-            autoAck: false,
-            consumer: consumer);
+        channel.BasicConsume(_appSettings.RabbitChannelRedisAds,
+            false,
+            consumer);
         return message!;
     }
 }

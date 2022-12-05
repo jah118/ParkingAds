@@ -1,3 +1,31 @@
 
 F
 pullADs/pullADs.csproj,2\0\201df8df9c270286fe6a80b7a5d49cccfeb5ffad
+B
+pullADs/Dockerfile,5\0\502fc91c8df33f615d2660d560422f896dca3c6a
+V
+&pullADs/Properties/launchSettings.json,2\a\2a9d6584b8f5b47fe48a3d2e8ff348b0801d1f3a
+A
+pullADs/AdItem.cs,d\b\dbf1ca170bf4a1b78dfee02fc5e3d7a181e528c9
+H
+pullADs/AdPullService.cs,f\7\f798d65c99f4a1a3b2c270eb6dcd66390d664468
+I
+pullADs/Facade/IAdItem.cs,4\f\4fa73363b56cf37cb19b222e4a07053ec2c3b9ba
+B
+docker-compose.yml,3\5\35b8c13cf2eb2a194eada000eb310d65aed53b2a
+T
+$pullADs/RabbitMQ/IMessageProducer.cs,c\7\c739c77d4530c8cf7b1a9f3cebccbda77fb5a288
+U
+%pullADs/Facade/IAppSettingsHandler.cs,4\e\4e9af263195458dd047139dfe1e9a5316dc57b31
+R
+"pullADs/util/AppSettingsHandler.cs,b\5\b557c8f7bc05ff65a4fb1bbc1bdee1be3987ac89
+P
+ pullADs/Facade/IAdPullService.cs,b\6\b654c66e80a8d3220e2913fd38dffb942396719d
+<
+pullADs/TODO,0\e\0e89ebf880b0c451d0b2ebba22bf8e8eb2c05e5c
+[
++RedisConsumerPullAds/Facade/IAppSettings.cs,8\5\853a38f594e743086692f332b1b0be46f71c762d
+a
+1RedisConsumerPullAds/RabbitMQ/IMessageConsumer.cs,e\2\e2d27863378138fccd043033b5cc56b5aea62f3d
+T
+$pullADs/RabbitMQ/RabbitMQProducer.cs,6\b\6b19ef51da201fa5dd113b38b2f89b813230be05

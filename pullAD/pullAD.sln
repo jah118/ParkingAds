@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pullADs", "pullADs\pullADs.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C7B50A23-1E3D-4A35-8931-96E2C17C3FE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisConsumer", "RedisConsumer\RedisConsumer.csproj", "{27D0D193-F0F3-48EB-976A-88B63F1C1946}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisConsumerPullAds", "RedisConsumerPullAds\RedisConsumerPullAds.csproj", "{27D0D193-F0F3-48EB-976A-88B63F1C1946}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

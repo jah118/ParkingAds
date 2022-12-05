@@ -22,7 +22,7 @@ public class RabbitMQProducer : IMessageProducer
         var factory = new ConnectionFactory {HostName = _appSettings.RabbitConn};
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
-        channel.QueueDeclare(queue: "ads",
+        channel.QueueDeclare(queue: _appSettings.RabbitChannelAds,
             durable: true,
             exclusive: false,
             autoDelete: false,
@@ -35,7 +35,7 @@ public class RabbitMQProducer : IMessageProducer
         properties.Persistent = true;
         
         channel.BasicPublish(exchange: "",
-            routingKey: "ads",
+            routingKey: _appSettings.RabbitChannelAds,
             basicProperties: properties,
             body: body);
         //TODO DO better log msg 

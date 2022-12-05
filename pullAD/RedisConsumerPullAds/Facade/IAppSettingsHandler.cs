@@ -1,6 +1,6 @@
-﻿using RedisConsumer.util;
+﻿using RedisConsumerPullAds.util;
 
-namespace RedisConsumer.Facade;
+namespace RedisConsumerPullAds.Facade;
 
 public interface IAppSettingsHandler
 {
