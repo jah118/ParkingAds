@@ -1,4 +1,4 @@
-﻿namespace pullADs.Facade;
+﻿namespace PullADsToMQ.Facade;
 
 public interface IAdItem
 {

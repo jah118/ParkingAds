@@ -1,6 +1,6 @@
-﻿using pullADs.Facade;
+﻿using PullADsToMQ.Facade;
 
-namespace pullADs
+namespace PullADsToMQ
 {
     public class AdItem : IAdItem
     {

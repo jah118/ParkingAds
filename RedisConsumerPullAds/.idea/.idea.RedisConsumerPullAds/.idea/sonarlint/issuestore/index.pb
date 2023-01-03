@@ -17,11 +17,3 @@ b
 2RedisConsumerPullAds/Facade/IRedisWorkerService.cs,4\f\4f77eafda48c8ad83dec174fd77894ebf91af720
 Y
 )RedisConsumerPullAds/RabbitMQ/Consumer.cs,6\a\6a3eefe9bf7b48f6c806802d604f1e177e4200a1
-c
-3RedisConsumerPullAds/util/RedisConnectionFactory.cs,9\9\994b62edb296b5762a885d01894b0fe32191291a
-Z
-*RedisConsumerPullAds/RedisWorkerService.cs,f\3\f336bb332200e0e4a5b834c59f93de3d98f4ad95
-a
-1RedisConsumerPullAds/RabbitMQ/RabbitMQConsumer.cs,a\b\ab10f1b31446228d6ed1f0a2c31f292bdbcc4a48
-O
-RedisConsumerPullAds/Program.cs,b\7\b702eb20338b79db39b335e3f34c8e717162f87c

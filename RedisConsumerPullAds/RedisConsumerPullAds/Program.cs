@@ -20,7 +20,7 @@ public static class Program
     private static IMessageConsumer _messageConsumer;
     private static IDatabase _redis;
 
-    private static Task  Main(string[] args)
+    public static void Main(string[] args)
     {
         Console.WriteLine("Hello World!");
 
@@ -29,7 +29,7 @@ public static class Program
         configurationBuilder.SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", false, true)
             .Build();
-        
+
         var configuration = configurationBuilder.Build();
 
         //setups
@@ -39,9 +39,9 @@ public static class Program
         Console.WriteLine("Hello World!");
         var serviceProvider = new ServiceCollection()
             .Configure<AppSettings>(configuration.GetSection("ApiSettings"))
-            .AddSingleton<IRedisWorkerService, RedisWorkerService>()
+            // .AddSingleton<IRedisWorkerService, RedisWorkerService>()
             .BuildServiceProvider();
-        
+
 
         // RedisConnectionFactory.SetSettings(Settings);
         // _redis = RedisConnectionFactory.Database;
@@ -56,12 +56,9 @@ public static class Program
         Log.Logger.Information("Application Starting");
         Log.Information("The global logger has been configured");
 
-        
-        
-        
         try
         {
-            var redisWorker = new RedisWorkerService(Settings);
+            var redisWorker = new RedisWorkerService();
 
             Console.WriteLine("Hello,123123 World!");
 
@@ -97,12 +94,12 @@ public static class Program
                 var body = eventArgs.Body.ToArray();
                 message = Encoding.UTF8.GetString(body);
                 Log.Information(" [x] Received {message}", message);
-                redisWorker.DataHandling(message);
-                
+                // redisWorker.DataHandling(message);
+
                 int dots = message.Split('.').Length - 1;
                 Thread.Sleep(dots * 5000);
-                
-                
+
+
                 // Note: it is possible to access the channel via
                 //       ((EventingBasicConsumer)sender).Model here
                 channel.BasicAck(eventArgs.DeliveryTag, false);
@@ -132,6 +129,19 @@ public static class Program
             Log.CloseAndFlush();
         }
     }
+    
+    
+    public IServiceProvider ConfigureServices(IServiceCollection services)
+    {
+        //Other DI registrations;
+
+        // Register Hosted Services
+        services.AddHostedService<GracePeriodManagerService>();
+        services.AddHostedService<MyHostedServiceB>();
+        services.AddHostedService<MyHostedServiceC>();
+        //...
+    }
+    
 
     // /// <summary>
     // ///     Gets Ad data, format it and send it to msg queue

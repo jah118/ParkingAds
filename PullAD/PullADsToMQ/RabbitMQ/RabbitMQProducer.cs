@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
-using pullADs.Facade;
+using PullADsToMQ.Facade;
 using RabbitMQ.Client;
 using Serilog;
 
-namespace pullADs.RabbitMQ;
+namespace PullADsToMQ.RabbitMQ;
 
 public class RabbitMQProducer : IMessageProducer
 {
@@ -19,7 +19,7 @@ public class RabbitMQProducer : IMessageProducer
     {
         Log.Information("Started producing");
         // TODO USE app settings
-        var factory = new ConnectionFactory {HostName = _appSettings.RabbitConn};
+        var factory = new ConnectionFactory { HostName = _appSettings.RabbitConn };
         using var connection = factory.CreateConnection();
         using var channel = connection.CreateModel();
         channel.QueueDeclare(queue: _appSettings.RabbitChannelAds,
@@ -30,10 +30,10 @@ public class RabbitMQProducer : IMessageProducer
 
         var json = JsonConvert.SerializeObject(message);
         var body = Encoding.UTF8.GetBytes(json);
-        
+
         var properties = channel.CreateBasicProperties();
         properties.Persistent = true;
-        
+
         channel.BasicPublish(exchange: "",
             routingKey: _appSettings.RabbitChannelAds,
             basicProperties: properties,

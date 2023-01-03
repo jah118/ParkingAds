@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using RedisConsumerPullAds.Facade;
 using RedisConsumerPullAds.util;
 using Serilog;
@@ -8,22 +9,41 @@ namespace RedisConsumerPullAds;
 
 public class RedisWorkerService : IRedisWorkerService
 {
-    private readonly IAppSettings? _appSettings;
+    private IAppSettings? _appSettings;
     private readonly IMessageConsumer _messageConsumer;
     private IDatabase _redis;
+    private readonly IOptionsMonitor<AppSettings> _optionsMonitor;
+    private readonly IConfiguration Configuration;
 
-    public RedisWorkerService(IOptionsMonitor<AppSettings> optionsMonitor, IMessageConsumer consumer)
+
+    private static Lazy<ConnectionMultiplexer> lazyConnection;
+
+
+    public static ConnectionMultiplexer Connection => lazyConnection.Value;
+
+
+    public RedisWorkerService()
     {
-        // _appSettings = appSettings;
-        _messageConsumer = consumer;
-        Setup();
+        // Setup();
     }
 
-    public RedisWorkerService(IAppSettings appSettings)
-    {
-        _appSettings = appSettings;
-        Setup();
-    }
+    // public RedisWorkerService(IOptionsMonitor<AppSettings> optionsMonitor) : this()
+    // {
+    //     _optionsMonitor = optionsMonitor;
+    // }
+    // public RedisWorkerService(IOptionsMonitor<AppSettings> optionsMonitor, IMessageConsumer consumer) : this()
+    // {
+    //     _optionsMonitor = optionsMonitor;
+    //     // _appSettings = appSettings;
+    //     _messageConsumer = consumer;
+    //
+    // }
+
+    // public RedisWorkerService(IAppSettings appSettings)
+    // {
+    //     _appSettings = appSettings;
+    //     Setup();
+    // }
 
 
     /// <summary>
@@ -89,24 +109,31 @@ public class RedisWorkerService : IRedisWorkerService
     }
 
 
-    private void Setup()
+    public void Setup(AppSettings appSettings)
     {
-        if (_appSettings is null) throw new ConfigurationMissingException();
-
-        RedisConnectionFactory(_appSettings);
-        _redis = RedisConnectionFactory.Database;
-    }
-
-    private void ReadData()
-    {
-        var cache = RedisConnectionFactory..GetDatabase();
-        var devicesCount = 10000;
-        for (var i = 0; i < devicesCount; i++)
+        if (appSettings is null) throw new ConfigurationMissingException();
+        _appSettings = appSettings;
+        
+        //TODO USE appsettings
+        lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
-            var value = cache.StringGet($"Device_Status:{i}");
-            Console.WriteLine($"Valor={value}");
-        }
+            return ConnectionMultiplexer.Connect("localhost");
+        });
+
+        // RedisConnectionFactory(_appSettings);
+        // _redis = RedisConnectionFactory.Database;
     }
+
+    // private void ReadData()
+    // {
+    //     var cache = RedisConnectionFactory..GetDatabase();
+    //     var devicesCount = 10000;
+    //     for (var i = 0; i < devicesCount; i++)
+    //     {
+    //         var value = cache.StringGet($"Device_Status:{i}");
+    //         Console.WriteLine($"Valor={value}");
+    //     }
+    // }
 
 
     public void SaveData(IDatabase _redis, string data)

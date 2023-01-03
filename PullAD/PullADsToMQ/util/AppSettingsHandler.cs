@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using pullADs.Facade;
+using PullADsToMQ.Facade;
 using Serilog;
 
 
 //DI, Seri
-namespace pullADs.util
+namespace PullADsToMQ.util
 {
     public class AppSettingsHandler : IAppSettingsHandler
     {

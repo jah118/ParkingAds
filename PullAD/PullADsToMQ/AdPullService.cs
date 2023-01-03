@@ -1,7 +1,7 @@
-﻿using pullADs.Facade;
+﻿using PullADsToMQ.Facade;
 using Serilog;
 
-namespace pullADs
+namespace PullADsToMQ
 {
     public class AdPullService : IAdPullService
     {
@@ -53,7 +53,7 @@ namespace pullADs
             }
             catch (Exception exception)
             {
-                Log.Error("Exception Hit------------ {$Data}", exception);
+                Log.Error("Exception Hit in ADPullService------------\n {$Data}", exception);
                 throw;
             }
         }

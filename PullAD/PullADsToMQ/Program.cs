@@ -1,41 +1,53 @@
 ﻿using System.Timers;
 using Microsoft.Extensions.Configuration;
-using pullADs.Facade;
-using pullADs.RabbitMQ;
-using pullADs.util;
+using PullADsToMQ.Facade;
+using PullADsToMQ.RabbitMQ;
+using PullADsToMQ.util;
 using Serilog;
 using Timer = System.Timers.Timer;
 
-namespace pullADs;
+namespace PullADsToMQ;
 
 public static class Program
 {
     private static Timer _aTimer = null!;
 
-    private static IAppSettings _appSettings;
-    private static IAdPullService _adPullService;
-    private static IMessageProducer _messagePublisher;
+    private static IAppSettings? _appSettings;
+    private static IAdPullService? _adPullService = new AdPullService();
+    private static IMessageProducer? _messagePublisher;
 
-    private static void Main(string[] args)
+    // https://itnext.io/net-console-apps-preparation-for-docker-b72c9dfc1ded to keep alive the shit way  Scenario 2
+    private static readonly AutoResetEvent _waitHandle = new AutoResetEvent(false);
+
+
+
+    public static void Main(string[] args)
     {
+
+
         Console.WriteLine("Hello World!");
 
         //setups
         var builder = new ConfigurationBuilder();
         IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
         _appSettings = settingsHandler.AppSettings;
+        Console.WriteLine(_appSettings.AdUrl);
+
+
         _messagePublisher = new RabbitMQProducer(_appSettings);
 
         Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Build())
+             .MinimumLevel.Debug()
+            //.ReadFrom.Configuration(builder.Build())
             .Enrich.FromLogContext()
             .WriteTo.Console()
+            .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
             .CreateLogger();
         try
         {
             Log.Logger.Information("Application Starting");
 
-            _adPullService = new AdPullService();
+            //_adPullService = new AdPullService();
 
             // Gets called here so TimerInterval does not block or delay a quick start by waiting
             DataHandling();
@@ -46,13 +58,26 @@ public static class Program
             // SetTimer(1000);
 
             Console.WriteLine("The application started at {0:HH:mm:ss.fff}", DateTime.Now);
-            Console.WriteLine("Press 'S' to stop");
+            Console.WriteLine("Press 'CTRL + C' to stop");
 
-            //TODO Do something better like wtf is this.....
-            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
+            ////TODO Do something better like wtf is this.....
+            //while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
+            //{
+            //    // do something
+            //}
+
+
+            // Handle Control+C or Control+Break
+            Console.CancelKeyPress += (o, e) =>
             {
-                // do something
-            }
+                Console.WriteLine("Exit");
+                // Allow the manin thread to continue and exit...
+                _waitHandle.Set();
+            };
+            // wait until Set method calls
+            _waitHandle.WaitOne();
+        
+
 
             _aTimer.Stop();
             _aTimer.Dispose();

@@ -1,6 +1,6 @@
-﻿using pullADs.util;
+﻿using PullADsToMQ.util;
 
-namespace pullADs.Facade;
+namespace PullADsToMQ.Facade;
 
 public interface IAppSettingsHandler
 {
