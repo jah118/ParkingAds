@@ -5,8 +5,6 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pullADs", "pullADs\pullADs.csproj", "{6511DDA6-BBF8-4F00-8918-86CCAA3A0EDD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisConsumerPullAds", "RedisConsumerPullAds\RedisConsumerPullAds.csproj", "{27D0D193-F0F3-48EB-976A-88B63F1C1946}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FEB9EACE-0D69-42C9-8CB4-5F636FC9F169}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BA3268E9-0F98-49B3-9A04-D97047645D9A}"
@@ -21,10 +19,6 @@ Global
 		{6511DDA6-BBF8-4F00-8918-86CCAA3A0EDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6511DDA6-BBF8-4F00-8918-86CCAA3A0EDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6511DDA6-BBF8-4F00-8918-86CCAA3A0EDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27D0D193-F0F3-48EB-976A-88B63F1C1946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27D0D193-F0F3-48EB-976A-88B63F1C1946}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27D0D193-F0F3-48EB-976A-88B63F1C1946}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27D0D193-F0F3-48EB-976A-88B63F1C1946}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA3268E9-0F98-49B3-9A04-D97047645D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA3268E9-0F98-49B3-9A04-D97047645D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA3268E9-0F98-49B3-9A04-D97047645D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
