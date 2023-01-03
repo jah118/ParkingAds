@@ -7,8 +7,8 @@ public class AppSettingsHandler : IAppSettingsHandler
 {
     public AppSettingsHandler(IConfigurationBuilder builder)
     {
-        // builder.SetBasePath(Directory.GetCurrentDirectory())
-        builder.SetBasePath("C:\\Users\\jonas\\Documents\\GitHub\\pullAdService\\pullAD\\RedisConsumerPullAds")
+        builder.SetBasePath(Directory.GetCurrentDirectory())
+        // builder.SetBasePath("C:\\Users\\jonas\\Documents\\GitHub\\pullAdService\\pullAD\\RedisConsumerPullAds")
             .AddJsonFile("appsettings.json", false, true);
 
         IConfiguration config = builder.Build();

@@ -14,6 +14,7 @@ namespace pullADs
             {
                 // Defines HttpClient with IDisposable.
                 using HttpClient client = new HttpClient();
+                //TODO: handle error with http code 200 with msg: "Something bad happened, Sorry.", this is an error that is no catched. 
                 // Initiate the Get Request
                 using HttpResponseMessage res = await client.GetAsync(baseUrl);
                 if (!res.IsSuccessStatusCode)

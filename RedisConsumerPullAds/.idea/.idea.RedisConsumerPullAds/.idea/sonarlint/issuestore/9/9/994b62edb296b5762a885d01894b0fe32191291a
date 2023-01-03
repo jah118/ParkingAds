@@ -1,0 +1,8 @@
+
+ncsharpsquid:S3010,"ERemove this assignment of '_appSettings' or initialize it statically.(™×Ïêùÿÿÿÿ8Õîò§Ó0
+mcsharpsquid:S3010-"DRemove this assignment of '_connection' or initialize it statically.(ùÔÁøøÿÿÿÿ8ªÈƒ¨Ó0
+Ucsharpsquid:S1144
+"1Remove the unused private field 'LazyConnection'.(ú‘Ì­8óÛˆ¨Ó0
+;csharpsquid:S125"Remove this commented out code.(Ú°à¬
+Acsharpsquid:S1256"Remove this commented out code.(¥’ÂA8ôÛˆ¨Ó0
+Bcsharpsquid:S125;"Remove this commented out code.(Ú°à¬8Âóˆ¨Ó0

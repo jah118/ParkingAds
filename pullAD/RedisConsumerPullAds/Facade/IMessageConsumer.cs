@@ -1,4 +1,4 @@
-﻿namespace RedisConsumerPullAds.RabbitMQ;
+﻿namespace RedisConsumerPullAds.Facade;
 
 public interface IMessageConsumer
 {

@@ -24,7 +24,7 @@ public static class Program
         var builder = new ConfigurationBuilder();
         IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
         _appSettings = settingsHandler.AppSettings;
-        _messagePublisher = new RabbitMQProducer(settingsHandler.AppSettings);
+        _messagePublisher = new RabbitMQProducer(_appSettings);
 
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Build())
@@ -93,7 +93,7 @@ public static class Program
         {
             Log.Information("Started DataHandling");
 
-            // TODO this needs to be check on startup maybe use fleunt validation later on settings class
+            // TODO this needs to be check on startup maybe use fluint validation later on settings class
             if (string.IsNullOrEmpty(_appSettings.AdUrl))
                 Log.Error("Configuration ERROR, No URI TO GET ads FROM got: {Uri}",
                     _appSettings.AdUrl);

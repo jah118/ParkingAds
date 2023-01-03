@@ -1,7 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Text;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using RedisConsumerPullAds.Facade;
+using RedisConsumerPullAds.RabbitMQ;
 using RedisConsumerPullAds.util;
 using Serilog;
 using StackExchange.Redis;
@@ -10,27 +16,34 @@ namespace RedisConsumerPullAds;
 
 public static class Program
 {
-    private static IAppSettings? _appSettings;
+    private static IAppSettings? Settings { get; set; }
     private static IMessageConsumer _messageConsumer;
     private static IDatabase _redis;
 
-    private static void Main(string[] args)
+    private static Task  Main(string[] args)
     {
         Console.WriteLine("Hello World!");
+
+
+        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        configurationBuilder.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", false, true)
+            .Build();
+        
+        var configuration = configurationBuilder.Build();
 
         //setups
         var builder = new ConfigurationBuilder();
         IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
-        _appSettings = settingsHandler.AppSettings;
+        Settings = settingsHandler.AppSettings;
+        Console.WriteLine("Hello World!");
+        var serviceProvider = new ServiceCollection()
+            .Configure<AppSettings>(configuration.GetSection("ApiSettings"))
+            .AddSingleton<IRedisWorkerService, RedisWorkerService>()
+            .BuildServiceProvider();
+        
 
-        // var serviceProvider = new ServiceCollection()
-        //     .AddLogging()
-        //     .AddSingleton<IMessageConsumer, RabbitMQConsumer>()
-        //     .AddSingleton<IRedisWorkerService, RedisWorkerService>()
-        //     .BuildServiceProvider();
-
-
-        // RedisConnectionFactory.SetSettings(_appSettings);
+        // RedisConnectionFactory.SetSettings(Settings);
         // _redis = RedisConnectionFactory.Database;
 
 
@@ -43,21 +56,72 @@ public static class Program
         Log.Logger.Information("Application Starting");
         Log.Information("The global logger has been configured");
 
+        
+        
+        
         try
         {
-            Console.WriteLine("Hello, World!");
+            var redisWorker = new RedisWorkerService(Settings);
 
-            //do the actual work here
-            //var worker = serviceProvider.GetService<IRedisWorkerService>();
-            //worker?.DataHandling();
+            Console.WriteLine("Hello,123123 World!");
+
+            // var appSettings = serviceProvider.GetService<IOptions<AppSettings>>().Value;
+
+            // Console.WriteLine(appSettings.ToString());
+            Console.WriteLine(Settings);
+
+            // var worker = serviceProvider.GetService<RedisWorkerService>();
+            // var Listener = serviceProvider.GetService<Consumer>();
+            //
+            // worker?.DataHandling(appSettings);
+
+
+            var factory = new ConnectionFactory {HostName = Settings.RabbitConn};
+            using var connection = factory.CreateConnection();
+            using var channel = connection.CreateModel();
+
+            channel.QueueDeclare(Settings.RabbitChannelRedisAds,
+                true,
+                false,
+                false,
+                null);
+
+            channel.BasicQos(0, 1, false);
+            Log.Information(" [*] Waiting for messages.");
+
+
+            var consumer = new EventingBasicConsumer(channel);
+            string message = null!;
+            consumer.Received += (sender, eventArgs) =>
+            {
+                var body = eventArgs.Body.ToArray();
+                message = Encoding.UTF8.GetString(body);
+                Log.Information(" [x] Received {message}", message);
+                redisWorker.DataHandling(message);
+                
+                int dots = message.Split('.').Length - 1;
+                Thread.Sleep(dots * 5000);
+                
+                
+                // Note: it is possible to access the channel via
+                //       ((EventingBasicConsumer)sender).Model here
+                channel.BasicAck(eventArgs.DeliveryTag, false);
+            };
+            channel.BasicConsume(Settings.RabbitChannelRedisAds,
+                false,
+                consumer);
+
+
             Console.WriteLine("tesa");
 
             // DataHandling();
-            //TODO Do something better like wtf is this.....
-            while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
-            {
-                // do something
-            }
+            // //TODO Do something better like wtf is this.....
+            // while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
+            // {
+            //     // do something
+            // }
+
+            Console.ReadKey();
         }
         catch (Exception ex)
         {

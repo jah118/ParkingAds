@@ -11,7 +11,8 @@ namespace pullADs.util
         public AppSettingsHandler(IConfigurationBuilder builder)
         {
             builder.SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, true);
+                .AddJsonFile("appsettings.json", optional: false, true)
+                .AddEnvironmentVariables();
 
             IConfiguration config = builder.Build();
 
