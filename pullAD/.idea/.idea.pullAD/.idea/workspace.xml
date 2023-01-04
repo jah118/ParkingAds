@@ -10,27 +10,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory2.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectorHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/RabbitMQs/IMessageProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/util/AppSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PullADsToMQ/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PullADsToMQ/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/4/f/4f77eafda48c8ad83dec174fd77894ebf91af720" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/9/0/904708bd4f353ba0b5eb1536829921f787e66687" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IAppSettingsHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IRedisWorkerService.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ProgramOld.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RabbitMQ/Consumer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisConsumerPullAds.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisConsumerPullAds.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisWorkerService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/appsettingsOld.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/AppSettingsHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory2.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Worker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/worker.csproj" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +68,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Docker.PullADsToMQ/Dockerfile">
+  <component name="RunManager" selected=".NET Launch Settings Profile.PullADsToMQ: pullADs">
     <configuration name="Unnamed" type="CompoundRunConfigurationType">
       <toRun name="pullADs" type="LaunchSettings" />
       <method v="2" />
@@ -236,7 +234,7 @@
       <workItem from="1672761305956" duration="356000" />
       <workItem from="1672762582029" duration="3703000" />
       <workItem from="1672825418220" duration="2581000" />
-      <workItem from="1672838821586" duration="3039000" />
+      <workItem from="1672838821586" duration="3105000" />
     </task>
     <servers />
   </component>

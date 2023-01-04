@@ -7,6 +7,7 @@ using RabbitMQ.Client.Events;
 using RedisConsumerPullAds.util;
 using Serilog;
 using StackExchange.Redis;
+
 // using ConsumerWorker;
 
 namespace RedisConsumerPullAds
@@ -113,7 +114,6 @@ namespace RedisConsumerPullAds
     {
         public static void Main(string[] args)
         {
-            
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 //.ReadFrom.Configuration(builder.Build())
@@ -136,24 +136,15 @@ namespace RedisConsumerPullAds
                     IConfiguration configuration = hostContext.Configuration;
                     services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
                     services.AddApplicationInsightsTelemetryWorkerService();
-                    // services.AddHostedService<ConsumerWorker>();
-                    
-                    // services.AddSingleton<IRedisConnectionFactory, RedisConnectionFactory>();
-                    // services.AddSingleton<RedisConnectionFactory2>();
 
                     services.AddHostedService<ConsumerWorker2>();
-
                 })
                 .Build();
 
             Log.Information("Application build");
-            // var provider = services.BuildServiceProvider();
 
             // // Run the microservice
             host.Run();
-
-            // var host = provider.GetRequiredService<IHost>();
-            // host.Run();
         }
     }
 }

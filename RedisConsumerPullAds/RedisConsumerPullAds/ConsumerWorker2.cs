@@ -94,6 +94,7 @@ public sealed class ConsumerWorker2 : BackgroundService
 
                 // Save the message in Redis
                 _redisDatabase.StringSet(_appSettings.RedisKey, message);
+                Log.Information("StringSet to redis with: {}",message);
                 //_channel.BasicAck(eventArgs.DeliveryTag, false);
             });
         };
