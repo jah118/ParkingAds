@@ -5,15 +5,9 @@ O
 RedisConsumerPullAds/.gitignore,2\2\222461eb752f91d84a9f7a105eff0c751e43cb20
 b
 2RedisConsumerPullAds/Facade/IAppSettingsHandler.cs,f\6\f611f0f2068e88dce2e47b3149204d5d354d16f3
-X
-(RedisConsumerPullAds/util/AppSettings.cs,8\a\8a35815a936873abe4fbbd314e6dda4478d0c945
-U
-%RedisConsumerPullAds/appsettings.json,0\7\0700b3344f232365d1f92f4bbea9c530d34ead4c
 _
 /RedisConsumerPullAds/util/AppSettingsHandler.cs,7\e\7e4f9c4da6c9f365b69c3f39026ba58c9b0cc5d6
 _
 /RedisConsumerPullAds/Facade/IMessageConsumer.cs,9\0\904708bd4f353ba0b5eb1536829921f787e66687
 b
 2RedisConsumerPullAds/Facade/IRedisWorkerService.cs,4\f\4f77eafda48c8ad83dec174fd77894ebf91af720
-Y
-)RedisConsumerPullAds/RabbitMQ/Consumer.cs,6\a\6a3eefe9bf7b48f6c806802d604f1e177e4200a1

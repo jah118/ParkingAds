@@ -1,203 +1,176 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System.Text;
+﻿using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using RedisConsumerPullAds.Facade;
-using RedisConsumerPullAds.RabbitMQ;
 using RedisConsumerPullAds.util;
 using Serilog;
 using StackExchange.Redis;
+// using ConsumerWorker;
 
-namespace RedisConsumerPullAds;
-
-public static class Program
+namespace RedisConsumerPullAds
 {
-    private static IAppSettings? Settings { get; set; }
-    private static IMessageConsumer _messageConsumer;
-    private static IDatabase _redis;
+    // public class ConsumerService : BackgroundService
+    // {
+    //     private readonly IConnection _rabbitMqConnection;
+    //     private readonly IDatabase _redisDatabase;
+    //     
+    //     private readonly CancellationTokenSource _stoppingCts =
+    //         new CancellationTokenSource();
+    //     private readonly string _queueName;
+    //     private readonly string _redisKey;
+    //
+    //     public ConsumerService(IConnection rabbitMqConnection, IDatabase redisDatabase, string queueName, string redisKey)
+    //     {
+    //         _rabbitMqConnection = rabbitMqConnection;
+    //         _redisDatabase = redisDatabase;
+    //         _queueName = queueName;
+    //         _redisKey = redisKey;
+    //     }
+    //
+    //     protected override Task ExecuteAsync(CancellationToken stoppingToken)
+    //     {
+    //         while (!stoppingToken.IsCancellationRequested)
+    //         {
+    //             var channel = _rabbitMqConnection.CreateModel();
+    //             channel.QueueDeclare(queue: _queueName,
+    //                 durable: false,
+    //                 exclusive: false,
+    //                 autoDelete: false,
+    //                 arguments: null);
+    //
+    //             Log.Information(" [*] Waiting for messages.");
+    //             channel.BasicQos(0, 1, false);
+    //
+    //
+    //             var consumer = new EventingBasicConsumer(channel);
+    //             // string message = null!;
+    //
+    //             consumer.Received += (model, eventArgs) =>
+    //             {
+    //                 var body = eventArgs.Body.ToArray();
+    //                 var message = Encoding.UTF8.GetString(body);
+    //                 Log.Information("Received message: {0}", message);
+    //
+    //                 // Save the message in Redis
+    //                 _redisDatabase.StringSet(_redisKey, message);
+    //                 channel.BasicAck(eventArgs.DeliveryTag, false);
+    //             };
+    //             channel.BasicConsume(queue: _queueName,
+    //                 autoAck: true,
+    //                 consumer: consumer);
+    //
+    //         }
+    //         return Task.CompletedTask;
+    //     }
+    //
+    //     public Task StartAsync(CancellationToken cancellationToken)
+    //     {
+    //         // Set up a consumer to handle incoming messages
+    //         var channel = _rabbitMqConnection.CreateModel();
+    //         channel.QueueDeclare(queue: _queueName,
+    //             durable: false,
+    //             exclusive: false,
+    //             autoDelete: false,
+    //             arguments: null);
+    //
+    //         Log.Information(" [*] Waiting for messages.");
+    //         channel.BasicQos(0, 1, false);
+    //
+    //
+    //         var consumer = new EventingBasicConsumer(channel);
+    //         // string message = null!;
+    //
+    //         consumer.Received += (model, eventArgs) =>
+    //         {
+    //             var body = eventArgs.Body.ToArray();
+    //             var message = Encoding.UTF8.GetString(body);
+    //             Log.Information("Received message: {0}", message);
+    //
+    //             // Save the message in Redis
+    //             _redisDatabase.StringSet(_redisKey, message);
+    //             channel.BasicAck(eventArgs.DeliveryTag, false);
+    //         };
+    //         channel.BasicConsume(queue: _queueName,
+    //             autoAck: true,
+    //             consumer: consumer);
+    //
+    //         return Task.CompletedTask;
+    //     }
+    //
+    //     public async  Task StopAsync(CancellationToken cancellationToken)
+    //     {
+    //         _rabbitMqConnection.Close();
+    //         _stoppingCts.Cancel();
+    //         // return Task.CompletedTask;
+    //         await Task.Delay(TimeSpan.FromSeconds(5), cancellationToken);
+    //
+    //     }
+    // }
 
-    public static void Main(string[] args)
+    static class Program
     {
-        Console.WriteLine("Hello World!");
-
-
-        IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-        configurationBuilder.SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", false, true)
-            .Build();
-
-        var configuration = configurationBuilder.Build();
-
-        //setups
-        var builder = new ConfigurationBuilder();
-        IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
-        Settings = settingsHandler.AppSettings;
-        Console.WriteLine("Hello World!");
-        var serviceProvider = new ServiceCollection()
-            .Configure<AppSettings>(configuration.GetSection("ApiSettings"))
-            // .AddSingleton<IRedisWorkerService, RedisWorkerService>()
-            .BuildServiceProvider();
-
-
-        // RedisConnectionFactory.SetSettings(Settings);
-        // _redis = RedisConnectionFactory.Database;
-
-
-        using var log = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Build())
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .CreateLogger();
-        Log.Logger = log;
-        Log.Logger.Information("Application Starting");
-        Log.Information("The global logger has been configured");
-
-        try
+        public static void Main(string[] args)
         {
-            var redisWorker = new RedisWorkerService();
+            
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                //.ReadFrom.Configuration(builder.Build())
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            Log.Logger.Information("Application Starting");
+            // Set up configuration
+            // var config = new ConfigurationBuilder()
+            //     .AddJsonFile("appsettings.json", optional: false)
+            //     .Build();
 
-            Console.WriteLine("Hello,123123 World!");
+            // Set up dependency injection
+            // var services = new ServiceCollection();
+            // IHost host = Host.CreateDefaultBuilder(args)
+            //     .ConfigureServices(services =>
+            //     {
+            IHost host = Host.CreateDefaultBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    IConfiguration configuration = hostContext.Configuration;
+                    AppSettings? options = configuration.GetSection("ApiSettings").Get<AppSettings>();
+                    services.AddSingleton(options);
+                    // services.AddSingleton<IConnection>(x =>
+                    // {
+                    //     // Connect to the RabbitMQ server
+                    //     var factory = new ConnectionFactory()
+                    //     {
+                    //         HostName = config["RabbitMQ:Host"],
+                    //         UserName = config["RabbitMQ:UserName"],
+                    //         Password = config["RabbitMQ:Password"]
+                    //     };
+                    //     return factory.CreateConnection();
+                    // });
+                    // services.AddSingleton<IDatabase>(sp =>
+                    // {
+                    //     // Connect to Redis
+                    //     return ConnectionMultiplexer.Connect(config["Redis:ConnectionString"]).GetDatabase();
+                    // });
+                    // services.AddSingleton(x => config["Queue:Name"]);
+                    // services.AddSingleton(x => config["RedisKey:Name"]);
+                    services.AddApplicationInsightsTelemetryWorkerService();
+                    services.AddHostedService<ConsumerWorker>();
 
-            // var appSettings = serviceProvider.GetService<IOptions<AppSettings>>().Value;
+                    // services.AddHostedService<Worker>();
+                })
+                .Build();
 
-            // Console.WriteLine(appSettings.ToString());
-            Console.WriteLine(Settings);
+            Log.Information("Application build");
+            // var provider = services.BuildServiceProvider();
 
-            // var worker = serviceProvider.GetService<RedisWorkerService>();
-            // var Listener = serviceProvider.GetService<Consumer>();
-            //
-            // worker?.DataHandling(appSettings);
+            // // Run the microservice
+            host.Run();
 
-
-            var factory = new ConnectionFactory {HostName = Settings.RabbitConn};
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
-
-            channel.QueueDeclare(Settings.RabbitChannelRedisAds,
-                true,
-                false,
-                false,
-                null);
-
-            channel.BasicQos(0, 1, false);
-            Log.Information(" [*] Waiting for messages.");
-
-
-            var consumer = new EventingBasicConsumer(channel);
-            string message = null!;
-            consumer.Received += (sender, eventArgs) =>
-            {
-                var body = eventArgs.Body.ToArray();
-                message = Encoding.UTF8.GetString(body);
-                Log.Information(" [x] Received {message}", message);
-                // redisWorker.DataHandling(message);
-
-                int dots = message.Split('.').Length - 1;
-                Thread.Sleep(dots * 5000);
-
-
-                // Note: it is possible to access the channel via
-                //       ((EventingBasicConsumer)sender).Model here
-                channel.BasicAck(eventArgs.DeliveryTag, false);
-            };
-            channel.BasicConsume(Settings.RabbitChannelRedisAds,
-                false,
-                consumer);
-
-
-            Console.WriteLine("tesa");
-
-            // DataHandling();
-            // //TODO Do something better like wtf is this.....
-            // while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.S))
-            // {
-            //     // do something
-            // }
-
-            Console.ReadKey();
-        }
-        catch (Exception ex)
-        {
-            Log.Fatal(ex, "Application terminated unexpectedly");
-        }
-        finally
-        {
-            Log.CloseAndFlush();
+            // var host = provider.GetRequiredService<IHost>();
+            // host.Run();
         }
     }
-    
-    
-    public IServiceProvider ConfigureServices(IServiceCollection services)
-    {
-        //Other DI registrations;
-
-        // Register Hosted Services
-        services.AddHostedService<GracePeriodManagerService>();
-        services.AddHostedService<MyHostedServiceB>();
-        services.AddHostedService<MyHostedServiceC>();
-        //...
-    }
-    
-
-    // /// <summary>
-    // ///     Gets Ad data, format it and send it to msg queue
-    // /// </summary>
-    // private static async Task DataHandling()
-    // {
-    //     try
-    //     {
-    //         Log.Information("Started DataHandling");
-    //
-    //         var data = _messageConsumer.ReceiveMessage();
-    //
-    //         Log.Debug("AD data received over bus: {@Data}", data);
-    //
-    //         if (string.IsNullOrEmpty(data))
-    //             //TODO  add alert bad data on queue - monitoring
-    //             Log.Error("ERROR, No data received");
-    //         else
-    //             //TODO add to redis 
-    //             Log.Information("Adding this redis: {@Data}", data);
-    //     }
-    //     catch (Exception e)
-    //     {
-    //         //TODO: do some smart error handling  or delete this try catch and let service fail
-    //         Console.WriteLine(e);
-    //         Log.Error("Exception Hit------------ ");
-    //     }
-    // }
-    //https://github.com/StackExchange/StackExchange.Redis/issues/1542
-
-    // public static void ReadData()
-    // {
-    //     var cache = RedisConnectionFactory.Connection.GetDatabase();
-    //     var devicesCount = 10000;
-    //     for (int i = 0; i < devicesCount; i++)
-    //     {
-    //         var value = cache.StringGet($"Device_Status:{i}");
-    //         Console.WriteLine($"Valor={value}");
-    //     }
-    // }
-    //
-    //
-    // public static void SaveData(IDatabase _redis, string data)
-    // {
-    // }
-    //
-    // public static void SaveBigData()
-    // {
-    //     var devicesCount = 10000;
-    //     var rnd = new Random();
-    //     var cache = RedisConnectionFactory.Connection.GetDatabase();
-    //
-    //     for (int i = 1; i < devicesCount; i++)
-    //     {
-    //         var value = rnd.Next(0, 10000);
-    //         cache.StringSet($"Device_Status:{i}", value);
-    //     }
-    // }
 }
