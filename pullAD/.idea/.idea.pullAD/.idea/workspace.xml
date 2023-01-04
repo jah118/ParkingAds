@@ -10,7 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/RabbitMQs/IMessageProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/util/AppSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/PullParkingService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/PullParkingService.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,7 +221,7 @@
       <workItem from="1672761305956" duration="356000" />
       <workItem from="1672762582029" duration="3703000" />
       <workItem from="1672825418220" duration="2581000" />
-      <workItem from="1672838821586" duration="3492000" />
+      <workItem from="1672838821586" duration="4271000" />
     </task>
     <servers />
   </component>
