@@ -33,7 +33,12 @@ IHost host = Host.CreateDefaultBuilder()
         IConfiguration configuration = hostContext.Configuration;
         services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
         services.AddScoped<IMessageProducer, RabbitMqProducer>();
+        services.AddScoped<IParkingPullService, ParkingPullService>();
         services.AddHostedService<ProducerWorker>();
     })
     .Build();
 Log.Information("Application build");
+
+
+// // Run the microservice
+host.Run();
