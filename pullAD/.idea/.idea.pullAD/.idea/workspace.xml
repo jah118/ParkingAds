@@ -10,25 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IAppSettingsHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IRedisWorkerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ProgramOld.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RabbitMQ/Consumer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisConsumerPullAds.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisConsumerPullAds.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/RedisWorkerService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/appsettingsOld.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/AppSettingsHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/RedisConnectionFactory2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/Worker.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/worker/worker.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +216,7 @@
       <workItem from="1672761305956" duration="356000" />
       <workItem from="1672762582029" duration="3703000" />
       <workItem from="1672825418220" duration="2581000" />
-      <workItem from="1672838821586" duration="3105000" />
+      <workItem from="1672838821586" duration="3492000" />
     </task>
     <servers />
   </component>
