@@ -29,7 +29,6 @@ public sealed class ConsumerWorker : BackgroundService
             HostName = _appSettings.RabbitConn,
             UserName = "guest",
             Password = "guest"
-        
         };
 
 
@@ -87,7 +86,6 @@ public sealed class ConsumerWorker : BackgroundService
                 //TODO DO WORK TO  message
                 _messagePublisher.SendMessage(message + "teset");
                 Log.Information("Has send message: {0}", message);
-
             });
         };
 
