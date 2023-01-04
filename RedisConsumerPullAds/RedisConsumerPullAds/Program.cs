@@ -122,44 +122,27 @@ namespace RedisConsumerPullAds
                 .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
             Log.Logger.Information("Application Starting");
-            // Set up configuration
-            // var config = new ConfigurationBuilder()
-            //     .AddJsonFile("appsettings.json", optional: false)
-            //     .Build();
 
-            // Set up dependency injection
-            // var services = new ServiceCollection();
-            // IHost host = Host.CreateDefaultBuilder(args)
-            //     .ConfigureServices(services =>
-            //     {
             IHost host = Host.CreateDefaultBuilder()
+                .ConfigureHostConfiguration(hostConfig =>
+                {
+                    hostConfig.SetBasePath(Directory.GetCurrentDirectory());
+                    hostConfig.AddJsonFile("appsettings.json", optional: true);
+                    hostConfig.AddEnvironmentVariables();
+                    hostConfig.AddCommandLine(args);
+                })
                 .ConfigureServices((hostContext, services) =>
                 {
                     IConfiguration configuration = hostContext.Configuration;
-                    AppSettings? options = configuration.GetSection("ApiSettings").Get<AppSettings>();
-                    services.AddSingleton(options);
-                    // services.AddSingleton<IConnection>(x =>
-                    // {
-                    //     // Connect to the RabbitMQ server
-                    //     var factory = new ConnectionFactory()
-                    //     {
-                    //         HostName = config["RabbitMQ:Host"],
-                    //         UserName = config["RabbitMQ:UserName"],
-                    //         Password = config["RabbitMQ:Password"]
-                    //     };
-                    //     return factory.CreateConnection();
-                    // });
-                    // services.AddSingleton<IDatabase>(sp =>
-                    // {
-                    //     // Connect to Redis
-                    //     return ConnectionMultiplexer.Connect(config["Redis:ConnectionString"]).GetDatabase();
-                    // });
-                    // services.AddSingleton(x => config["Queue:Name"]);
-                    // services.AddSingleton(x => config["RedisKey:Name"]);
+                    services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
                     services.AddApplicationInsightsTelemetryWorkerService();
-                    services.AddHostedService<ConsumerWorker>();
+                    // services.AddHostedService<ConsumerWorker>();
+                    
+                    // services.AddSingleton<IRedisConnectionFactory, RedisConnectionFactory>();
+                    // services.AddSingleton<RedisConnectionFactory2>();
 
-                    // services.AddHostedService<Worker>();
+                    services.AddHostedService<ConsumerWorker2>();
+
                 })
                 .Build();
 

@@ -31,8 +31,6 @@ public static class Program
         var builder = new ConfigurationBuilder();
         IAppSettingsHandler settingsHandler = new AppSettingsHandler(builder);
         _appSettings = settingsHandler.AppSettings;
-        Console.WriteLine(_appSettings.AdUrl);
-
 
         _messagePublisher = new RabbitMQProducer(_appSettings);
 
