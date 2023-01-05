@@ -10,8 +10,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/.idea/.idea.Splitter/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/RabbitMQs/IMessageProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/util/AppSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,7 +58,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.pullADs">
+  <component name="RunManager" selected=".NET Launch Settings Profile.PullADsToMQ: pullADs">
     <configuration name="Unnamed" type="CompoundRunConfigurationType">
       <toRun name="pullADs" type="LaunchSettings" />
       <method v="2" />
@@ -220,7 +226,7 @@
       <workItem from="1672825418220" duration="2581000" />
       <workItem from="1672838821586" duration="6732000" />
       <workItem from="1672908139711" duration="1197000" />
-      <workItem from="1672911370450" duration="1216000" />
+      <workItem from="1672911370450" duration="1930000" />
     </task>
     <servers />
   </component>
