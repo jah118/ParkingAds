@@ -9,15 +9,7 @@
     <projectFile profileName="pullADs">pullADs/pullADs.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/ConsumerWorkerHandleParking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/ConsumerWorkerHandleParking.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RabbitMQ/RabbitMQConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RabbitMQ/RabbitMQConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RedisConsumerParking.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RedisConsumerParking.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/RedisConnectorHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/RedisConnectorHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Program.cs" afterDir="false" />
-    </list>
+    <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
