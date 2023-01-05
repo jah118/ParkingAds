@@ -1,12 +1,10 @@
-﻿using RedisConsumerPullAds.Facade;
+﻿namespace RedisConsumerParking.Facade;
 
-namespace RedisConsumerPullAds.util;
-
-public class AppSettings : IAppSettings
+public interface IAppSettings
 {
-    public string? RedisConn { get; set; }
-    public string? RabbitConn { get; set; }
-    public string? RabbitChannelRedisAds { get; set; }
+    string? RedisConn { get; set; }
+    string? RabbitConn { get; set; }
+    string? RabbitChannelRedisAds { get; set; }
     
     public string? Host { get; set; }
     public string? UserName { get; set; }

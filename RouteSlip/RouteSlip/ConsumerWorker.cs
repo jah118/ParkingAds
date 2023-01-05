@@ -29,7 +29,6 @@ public sealed class ConsumerWorker : BackgroundService
             HostName = _appSettings.RabbitConn,
             UserName = "guest",
             Password = "guest"
-        
         };
 
 
@@ -87,22 +86,6 @@ public sealed class ConsumerWorker : BackgroundService
                 //TODO DO WORK TO  message
                 _messagePublisher.SendMessage(message + "teset");
                 Log.Information("Has send message: {0}", message);
-
-                // // BackgroundService is a Singleton service
-                // // IHeroesRepository is declared a Scoped service
-                // // by definition a Scoped service can't be consumed inside a Singleton
-                // // to solve this, we create a custom scope inside the Singleton and 
-                // // perform the insertion.
-                // using (var scope = _sp.CreateScope())
-                // {
-                //     var db = scope.ServiceProvider.GetRequiredService<IHeroesRepository>();
-                //     db.Create(hero);
-                // }
-
-
-                // Save the message in Redis
-                //_redisDatabase.StringSet(options.RedisKey, message);
-                //_channel.BasicAck(eventArgs.DeliveryTag, false);
             });
         };
 

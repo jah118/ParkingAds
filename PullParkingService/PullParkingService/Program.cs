@@ -3,9 +3,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RouteSlip;
-using RouteSlip.RabbitMQs;
-using RouteSlip.util;
+using PullParkingService;
+using PullParkingService.RabbitMQs;
+using PullParkingService.util;
 using Serilog;
 
 Console.WriteLine("Hello, World!");
@@ -33,12 +33,12 @@ IHost host = Host.CreateDefaultBuilder()
         IConfiguration configuration = hostContext.Configuration;
         services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
         services.AddScoped<IMessageProducer, RabbitMqProducer>();
-        services.AddHostedService<ConsumerWorker>();
-        services.AddApplicationInsightsTelemetryWorkerService();
-
+        services.AddScoped<IParkingPullService, ParkingPullService>();
+        services.AddHostedService<ProducerWorker>();
     })
     .Build();
 Log.Information("Application build");
+
 
 // // Run the microservice
 host.Run();

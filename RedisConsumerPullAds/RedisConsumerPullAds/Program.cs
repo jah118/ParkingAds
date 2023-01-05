@@ -8,7 +8,7 @@ using RedisConsumerPullAds.util;
 using Serilog;
 using StackExchange.Redis;
 
-// using ConsumerWorker;
+// using ConsumerWorkerHandleParking;
 
 namespace RedisConsumerPullAds
 {
@@ -137,7 +137,7 @@ namespace RedisConsumerPullAds
                     services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
                     services.AddApplicationInsightsTelemetryWorkerService();
 
-                    services.AddHostedService<ConsumerWorker2>();
+                    services.AddHostedService<ConsumerWorkerHandelAds>();
                 })
                 .Build();
 

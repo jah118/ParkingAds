@@ -1,6 +1,6 @@
-﻿using RedisConsumerPullAds.Facade;
+﻿using RedisConsumerParking.Facade;
 
-namespace RedisConsumerPullAds.util;
+namespace RedisConsumerParking.util;
 
 public class AppSettings : IAppSettings
 {

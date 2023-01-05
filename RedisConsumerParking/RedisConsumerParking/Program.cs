@@ -3,9 +3,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RouteSlip;
-using RouteSlip.RabbitMQs;
-using RouteSlip.util;
+using RedisConsumerParking;
+using RedisConsumerParking.util;
 using Serilog;
 
 Console.WriteLine("Hello, World!");
@@ -32,10 +31,8 @@ IHost host = Host.CreateDefaultBuilder()
     {
         IConfiguration configuration = hostContext.Configuration;
         services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
-        services.AddScoped<IMessageProducer, RabbitMqProducer>();
-        services.AddHostedService<ConsumerWorker>();
+        services.AddHostedService<ConsumerWorkerHandleParking>();
         services.AddApplicationInsightsTelemetryWorkerService();
-
     })
     .Build();
 Log.Information("Application build");
