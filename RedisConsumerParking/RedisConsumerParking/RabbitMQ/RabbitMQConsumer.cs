@@ -1,14 +1,18 @@
 ﻿using System.Text;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using RedisConsumerParking.Facade;
 using RedisConsumerParking.util;
+using Serilog;
 
 namespace RedisConsumerParking.RabbitMQ;
 
-public class RabbitMQConsumer : IMessageConsumer
+public class RabbitMqConsumer : IMessageConsumer
 {
      private readonly IAppSettings _appSettings;
 
-    public RabbitMQConsumer(IOptionsMonitor<AppSettings> optionsMonitor)
+    public RabbitMqConsumer(IOptionsMonitor<AppSettings> optionsMonitor)
     {
         
     }

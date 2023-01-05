@@ -17,9 +17,7 @@ public class ProducerWorker : BackgroundService
 
 
     private AppSettings _appSettings;
-    // private ConnectionFactory _factory;
-    // private IConnection _connection;
-    // private IModel _channel;
+
 
 
     public ProducerWorker(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor,
@@ -55,7 +53,7 @@ public class ProducerWorker : BackgroundService
         Log.Information("BackgroundService Started");
         DoWork();
         // Option 2 (.NET 6)
-        var timer = new PeriodicTimer(TimeSpan.FromMinutes(_appSettings.TimerInterval1));
+        var timer = new PeriodicTimer(TimeSpan.FromMilliseconds(_appSettings.TimerInterval1));
         while (await timer.WaitForNextTickAsync(stoppingToken))
         {
             Log.Information("Started DoWork");

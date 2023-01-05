@@ -73,7 +73,7 @@ public sealed class ConsumerWorkerHandelAds : BackgroundService
             });
         };
 
-        _channel.BasicConsume(_appSettings.RabbitChannelRedisAds, true, consumer);
+        _channel.BasicConsume(_appSettings.QueueName2, true, consumer);
 
         return Task.CompletedTask;
     }

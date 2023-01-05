@@ -34,6 +34,8 @@ IHost host = Host.CreateDefaultBuilder()
         services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
         services.AddScoped<IMessageProducer, RabbitMqProducer>();
         services.AddHostedService<ConsumerWorker>();
+        services.AddApplicationInsightsTelemetryWorkerService();
+
     })
     .Build();
 Log.Information("Application build");

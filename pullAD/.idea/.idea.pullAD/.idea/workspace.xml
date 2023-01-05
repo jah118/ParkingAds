@@ -10,26 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/.idea/.idea.RedisConsumerParking/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/ConsumerWorkerHandleParking.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Facade/IAppSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Facade/IMessageConsumer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RabbitMQ/RabbitMQConsumer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/AppSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/RedisConnectorHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorkerHandelAds.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/3/5/3519f21397fcfc454881ce8653adc17ed34d64a7" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/7/e/7e4f9c4da6c9f365b69c3f39026ba58c9b0cc5d6" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/f/6/f611f0f2068e88dce2e47b3149204d5d354d16f3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/.idea/.idea.RedisConsumerPullAds/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/ConsumerWorker2.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IAppSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Facade/IAppSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/AppSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerPullAds/RedisConsumerPullAds/util/AppSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/ConsumerWorkerHandleParking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/ConsumerWorkerHandleParking.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RabbitMQ/RabbitMQConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RabbitMQ/RabbitMQConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RedisConsumerParking.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/RedisConsumerParking.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/RedisConnectorHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisConsumerParking/RedisConsumerParking/util/RedisConnectorHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +223,7 @@
       <workItem from="1672762582029" duration="3703000" />
       <workItem from="1672825418220" duration="2581000" />
       <workItem from="1672838821586" duration="6732000" />
-      <workItem from="1672908139711" duration="792000" />
+      <workItem from="1672908139711" duration="1197000" />
     </task>
     <servers />
   </component>

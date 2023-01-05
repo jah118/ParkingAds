@@ -1,19 +1,16 @@
-﻿namespace RedisConsumerParking.util;
+﻿using StackExchange.Redis;
 
-public class RedisConnectorHelper
+namespace RedisConsumerParking.util;
+
+public static class RedisConnectorHelper
 {
+    private static readonly Lazy<ConnectionMultiplexer> LazyConnection;
+
     static RedisConnectorHelper()
     {
-        RedisConnectorHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-        {
-            return ConnectionMultiplexer.Connect("localhost:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81");
-        });
+        RedisConnectorHelper.LazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+            ConnectionMultiplexer.Connect("localhost:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81"));
     }
 
-    private static Lazy<ConnectionMultiplexer> lazyConnection;
-
-    public static ConnectionMultiplexer Connection
-    {
-        get { return lazyConnection.Value; }
-    }
+    public static ConnectionMultiplexer Connection => LazyConnection.Value;
 }

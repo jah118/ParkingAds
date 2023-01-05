@@ -1,5 +1,11 @@
 ﻿using System.Text;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using RedisConsumerParking.util;
+using Serilog;
+using StackExchange.Redis;
 
 namespace RedisConsumerParking;
 
@@ -8,7 +14,7 @@ public sealed class ConsumerWorkerHandleParking : BackgroundService
     private readonly AppSettings _appSettings;
     private readonly IModel _channel;
     private readonly IConnection _connection;
-    private readonly ConnectionFactory _factory;
+    private readonly ConnectionFactory _rabbitFactory;
     private readonly IDatabase _redisDatabase;
 
     public ConsumerWorkerHandleParking(IOptionsMonitor<AppSettings> optionsMonitor)
@@ -17,9 +23,9 @@ public sealed class ConsumerWorkerHandleParking : BackgroundService
 
         _redisDatabase = RedisConnectorHelper.Connection.GetDatabase();
 
-        _factory = new ConnectionFactory {HostName = _appSettings.RabbitConn};
+        _rabbitFactory = new ConnectionFactory {HostName = _appSettings.RabbitConn};
 
-        _connection = _factory.CreateConnection();
+        _connection = _rabbitFactory.CreateConnection();
 
         _channel = _connection.CreateModel();
 
@@ -68,7 +74,7 @@ public sealed class ConsumerWorkerHandleParking : BackgroundService
             });
         };
 
-        _channel.BasicConsume(_appSettings.RabbitChannelRedisAds, true, consumer);
+        _channel.BasicConsume(_appSettings.QueueName1, true, consumer);
 
         return Task.CompletedTask;
     }
