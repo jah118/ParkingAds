@@ -15,9 +15,9 @@ services:
            container_name: routeslipForP-Ads
            image: jah118/routeslip_for_p_ads
 #           restart: unless-stopped
-           environment:
-            - ASPNETCORE_ENVIRONMENT=Development
-            - redisConn=34534534534534q5q34534q532453
+#           environment:
+#            - ASPNETCORE_ENVIRONMENT=Development
+#            - redisConn=34534534534534q5q34534q532453
 
          #   -add other services
 
