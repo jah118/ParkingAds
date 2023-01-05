@@ -14,10 +14,10 @@ public sealed class ConsumerWorker : BackgroundService
     private readonly IMessageProducer _messagePublisher;
 
 
-    private AppSettings _appSettings;
-    private ConnectionFactory _factory;
-    private IConnection _connection;
-    private IModel _channel;
+    private readonly AppSettings _appSettings;
+    private readonly ConnectionFactory _factory;
+    private readonly IConnection _connection;
+    private readonly IModel _channel;
 
     public ConsumerWorker(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor)
     {
@@ -72,8 +72,6 @@ public sealed class ConsumerWorker : BackgroundService
             var body = eventArgs.Body.ToArray();
 
             // convert back to the original string
-            // {index}|SuperHero{10000+index}|Fly,Eat,Sleep,Manga|1|{DateTime.UtcNow.ToLongDateString()}|0|0
-            // is received here
             var message = Encoding.UTF8.GetString(body);
             Log.Information("Received message: {0}", message);
             Console.WriteLine(" [x] Received {0}", message);
@@ -84,7 +82,7 @@ public sealed class ConsumerWorker : BackgroundService
                 Log.Information("Getting msg ready");
 
                 //TODO DO WORK TO  message
-                _messagePublisher.SendMessage(message + "teset");
+                _messagePublisher.SendMessage(message + " teset");
                 Log.Information("Has send message: {0}", message);
             });
         };
