@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using ParkingAdsAPI.Data;
 using ParkingAdsAPI.DTO;
 using ParkingAdsAPI.RabbitMQs;
@@ -35,6 +36,26 @@ namespace ParkingAdsAPI.Controllers
         {
 
             //TODO build MSG that follow Schema 
+
+            var json = new JSONModel
+            {
+                searchedLocation = place,
+                topicKey = _appSettings.RabbitQueueName,
+                sesssion = new Sesssion
+                {
+                    time_sent =  DateTime.Now.ToString(),
+                    messageId = Guid.NewGuid().ToString(),
+                    aggregatorTarget = null,
+                    splitCounter = -1
+                },
+                adData = null,
+                parkingData = null
+            };
+            
+            
+            var stringjson = JsonConvert.SerializeObject(json);  
+
+            
 
             _messagePublisher.SendMessage(place);
 
