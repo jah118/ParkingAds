@@ -1,9 +1,11 @@
 ﻿using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Serilog;
+using Splitter.Data;
 using Splitter.RabbitMQs;
 using Splitter.util;
 
@@ -84,14 +86,20 @@ public sealed class ConsumerWorker : BackgroundService
                 if (_appSettings.RabbitQueueNameProduceList != null)
                 {
                     var count = _appSettings.RabbitQueueNameProduceList.Count();
+                    JsonModel deserializeObject = JsonConvert.DeserializeObject<JsonModel>(message);
+                    deserializeObject.Sesssion.SplitCounter =
+                        count; //TODO do this the smart way, need monitor information and add logic to decide which aggregator to chose
+                    
                     for (var a = 0; a <= count - 1; a += 1)
                     {
-                        var queueName = _appSettings.RabbitQueueNameConsume + "." +
-                                        _appSettings.RabbitQueueNameProduceList[a];
+                        var queueName =
+                            $"{_appSettings.RabbitQueueNameConsume}.{_appSettings.RabbitQueueNameProduceList[a]}";
+                        deserializeObject.TopicKey = queueName;
+
                         //TODO: update json message with count size so splits i known for the aggregator
                         //TODO: DO actual splitter work on msg, do not send whole msg 
-                        _messagePublisher.SendMessage(message, queueName);
-                        Log.Information("Has send message: {string} onto {string}", message, queueName);
+                        _messagePublisher.SendMessage(deserializeObject, queueName);
+                        Log.Information("Has send message: {string} onto {string}", deserializeObject, queueName);
                     }
                 }
             });

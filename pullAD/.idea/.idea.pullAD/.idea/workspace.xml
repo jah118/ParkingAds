@@ -10,17 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/JSONModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/.idea/.idea.ParkingService/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/RabbitMQs/IMessageProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/util/AppSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/Data/JSONModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/Data/JSONModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/Data/JSONModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Controllers/ParkingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Controllers/ParkingController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/DataModels.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/JSONModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/JsonModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParkingService/ParkingService/Worker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/Worker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ParkingPullService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ParkingPullService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/ProducerWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../PullParkingService/PullParkingService/model/ParkingDataItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../PullParkingService/PullParkingService/model/ParkingDataItem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/ConsumerWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RouteSlip/RouteSlip/RouteSlip.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../RouteSlip/RouteSlip/RouteSlip.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +230,7 @@
       <workItem from="1672825418220" duration="2581000" />
       <workItem from="1672838821586" duration="6732000" />
       <workItem from="1672908139711" duration="1197000" />
-      <workItem from="1672911370450" duration="2548000" />
+      <workItem from="1672911370450" duration="3114000" />
     </task>
     <servers />
   </component>

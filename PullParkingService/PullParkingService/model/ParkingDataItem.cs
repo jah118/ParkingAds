@@ -3,21 +3,21 @@
     public interface IParkingDataItem
     {
         bool Success { get; set; }
-        string Content { get; set; }
+        public List<PInerData> Content { get; set; }
     }
-    
+
     public class ParkingDataItem : IParkingDataItem
     {
-        public ParkingDataItem()
-        {
-        }
+        public bool Success { get; set; } = false;
+        public List<PInerData> Content { get; set; }
+    }
 
-        public ParkingDataItem(string content) : this()
-        {
-            Content = content;
-        }
-
-        public bool Success { get; set; }
-        public string Content { get; set; } = null!;
+    public class PInerData
+    {
+        public string date { get; set; }
+        public string name { get; set; }
+        public string coord { get; set; }
+        public string max { get; set; }
+        public string current { get; set; }
     }
 }

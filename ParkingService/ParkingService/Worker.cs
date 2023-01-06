@@ -1,6 +1,8 @@
 using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using ParkingService.Data;
 using ParkingService.RabbitMQs;
 using ParkingService.util;
 using RabbitMQ.Client;
@@ -87,14 +89,26 @@ public sealed class Worker : BackgroundService
             Task.Run(() =>
             {
                 Log.Information("Getting msg ready");
-
+                //Pull redis data
                 var redisData = _redisDatabase.StringGet(_appSettings.RedisKey);
+                ParkingData? parkingData = JsonConvert.DeserializeObject<ParkingData>(redisData!);
+                
+                //Deserialize JSON Message to Object
+                JsonModel deserializeMessageObject = JsonConvert.DeserializeObject<JsonModel>(message);
+                //Add info to object
+                deserializeMessageObject.TopicKey = _appSettings.RabbitQueueNameProduce;
+                deserializeMessageObject!.ParkingData = parkingData;
                 //TODO 
                 var trafficData = "THERE IS NO TRAFFIC (PlaceHolder Text) ";
+                deserializeMessageObject.TrafficData = new TrafficData()
+                {
+                    Data = trafficData
+                };
 
-                var parkingMsg = $"{message} teset {redisData} {trafficData}";
-                _messagePublisher.SendMessage(parkingMsg);
-                Log.Information("Has send message: {string}", parkingMsg);
+                _messagePublisher.SendMessage(deserializeMessageObject);
+                var serializeObject = JsonConvert.SerializeObject(deserializeMessageObject);
+
+                Log.Information("Has send message: {JSON}", serializeObject);
             });
         };
 
