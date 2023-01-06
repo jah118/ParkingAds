@@ -1,4 +1,5 @@
-﻿using PullParkingService.model;
+﻿using Newtonsoft.Json;
+using PullParkingService.model;
 using Serilog;
 
 namespace PullParkingService;
@@ -45,11 +46,14 @@ public class ParkingPullService : IParkingPullService
                 // TODO check if this needs parsing add output from request to debug log.
                 // TODO Look up serilog structured log and transform data 
                 Log.Information("Received {$Data}", dataString);
-                Log.Information("Received {Data}", dataString);
 
-                item = new ParkingDataItem(dataString)
+                List<PInerData> deserializeObject = JsonConvert.DeserializeObject<List<PInerData>>(dataString);
+                
+                
+                item = new ParkingDataItem
                 {
-                    Success = true
+                    Success = true,
+                    Content = deserializeObject
                 };
                 return item;
             }

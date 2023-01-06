@@ -27,25 +27,7 @@ public class ProducerWorker : BackgroundService
         _appSettings = optionsMonitor.CurrentValue;
         _messagePublisher = messagePublisher;
         _parkingPullService = parkingPullService;
-
-
-        // _factory = new ConnectionFactory()
-        // {
-        //     HostName = _appSettings.RabbitConn,
-        //     UserName = "guest",
-        //     Password = "guest"
-        // };
-        //
-        // _connection = _factory.CreateConnection();
-        //
-        // _channel = _connection.CreateModel();
-        //
-        // _channel.QueueDeclare(
-        //     queue: _appSettings.RabbitQueueNameConsume,
-        //     durable: true,
-        //     exclusive: false,
-        //     autoDelete: false,
-        //     arguments: null);
+        
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -75,10 +57,10 @@ public class ProducerWorker : BackgroundService
                 Log.Error("Configuration ERROR, No URI TO GET ads FROM got: {Uri}",
                     _appSettings.URL);
 
-            var data = await _parkingPullService!.GetData(_appSettings.URL);
-            Log.Logger.Information("AD data: {@Data}", data);
+            var parkingDataItem = await _parkingPullService!.GetData(_appSettings.URL);
+            Log.Information("AD data: {@Data}", parkingDataItem);
 
-            if (data.Success is false || string.IsNullOrEmpty(data.Content))
+            if (parkingDataItem.Success is false )
             {
                 //TODO do some smart error handling like change the Timer interval, alert after 5 retries, that service is dead  or no data is received
                 Log.Error("ERROR, No good data received");
@@ -89,7 +71,7 @@ public class ProducerWorker : BackgroundService
                 Console.WriteLine(_appSettings.URL);
                 // TODO do formatining and paring 
                 // TODO check format by regex like "<[a-zA-Z]+ [a-zA-Z]+='[^']*'>[a-zA-Z]+ [a-zA-Z]+</[a-zA-Z]+>"
-                var formattedData = data;
+                var formattedData = parkingDataItem;
 
                 Console.WriteLine("rabbit send ");
 

@@ -7,64 +7,57 @@ using ParkingAdsAPI.DTO;
 using ParkingAdsAPI.RabbitMQs;
 using ParkingAdsAPI.Util;
 
+
 namespace ParkingAdsAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ParkingController : ControllerBase
     {
-
         private readonly IMessageProducer _messagePublisher;
 
         private readonly IConfiguration _config;
         private readonly AppSettings _appSettings;
 
 
-
-
-        public ParkingController(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor) 
+        public ParkingController(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor)
         {
             _messagePublisher = messagePublisher;
             _appSettings = optionsMonitor.CurrentValue;
             //_config = config;
-
         }
 
 
         [HttpGet("{place}", Name = "GetParking")]
         public async Task<IActionResult> GetParking(string place)
         {
-
             //TODO build MSG that follow Schema 
 
-            var json = new JSONModel
+
+            var json = new JsonModel
             {
-                searchedLocation = place,
-                topicKey = _appSettings.RabbitQueueName,
-                sesssion = new Sesssion
+                SearchedLocation = place,
+                TopicKey = _appSettings.RabbitQueueName,
+
+                // Sesssion = null,
+                Sesssion = new Sesssion
                 {
-                    time_sent =  DateTime.Now.ToString(),
-                    messageId = Guid.NewGuid().ToString(),
-                    aggregatorTarget = null,
-                    splitCounter = -1
+                    TimeSent = DateTime.Now.ToString(),
+                    MessageId = Guid.NewGuid().ToString(),
+                    AggregatorTarget = null,
+                    SplitCounter = -1
                 },
-                adData = null,
-                parkingData = null
+                AdData = null,
+                ParkingData = null
             };
-            
-            
-            var stringjson = JsonConvert.SerializeObject(json);  
 
-            
-
-            _messagePublisher.SendMessage(place);
+            _messagePublisher.SendMessage(json);
 
             //TODO: call cache 
             //TODO: Await svar  og build return model 
 
             return Ok();
         }
-
 
 
         [HttpPost]
@@ -76,7 +69,6 @@ namespace ParkingAdsAPI.Controllers
             };
 
 
-
             _messagePublisher.SendMessage(model.Data);
 
 
@@ -85,7 +77,5 @@ namespace ParkingAdsAPI.Controllers
 
             return Ok(model);
         }
-
-
     }
 }

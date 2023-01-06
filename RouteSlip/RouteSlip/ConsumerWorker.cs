@@ -1,8 +1,10 @@
 ﻿using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RouteSlip.Data;
 using RouteSlip.RabbitMQs;
 using RouteSlip.util;
 using Serilog;
@@ -80,10 +82,17 @@ public sealed class ConsumerWorker : BackgroundService
             Task.Run(() =>
             {
                 Log.Information("Getting msg ready");
-
                 //TODO DO WORK TO  message
-                _messagePublisher.SendMessage(message + " teset");
-                Log.Information("Has send message: {0}", message);
+                JsonModel deserializeObject = JsonConvert.DeserializeObject<JsonModel>(message);
+                deserializeObject.TopicKey = _appSettings.RabbitQueueNameProduce;
+                deserializeObject.Sesssion.AggregatorTarget =
+                    "aggregator_A"; //TODO do this the smart way, need monitor information and add logic to decide which aggregator to chose
+                
+                
+                _messagePublisher.SendMessage(deserializeObject);
+                var serializeObject = JsonConvert.SerializeObject(deserializeObject);
+
+                Log.Information("Has send message: {0} with content \n{JSON}", deserializeObject, serializeObject);
             });
         };
 
