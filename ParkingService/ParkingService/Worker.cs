@@ -1,42 +1,49 @@
-﻿using System.Text;
+using System.Text;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using ParkingService.RabbitMQs;
+using ParkingService.util;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Serilog;
-using Splitter.RabbitMQs;
-using Splitter.util;
+using StackExchange.Redis;
 
-namespace Splitter;
+namespace ParkingService;
 
-public sealed class ConsumerWorker : BackgroundService
+public sealed class Worker : BackgroundService
 {
     private readonly IMessageProducer _messagePublisher;
 
 
     private readonly AppSettings _appSettings;
-    private readonly ConnectionFactory _factory;
+    private readonly ConnectionFactory _rabbitFactory;
     private readonly IConnection _connection;
     private readonly IModel _channel;
 
-    public ConsumerWorker(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor)
+    private readonly IDatabase _redisDatabase;
+    private readonly IConnectionMultiplexer _redis;
+
+    public Worker(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor,
+        IConnectionMultiplexer redis)
     {
         _appSettings = optionsMonitor.CurrentValue;
+
+        _redis = redis;
+        _redisDatabase = _redis.GetDatabase();
+
         _messagePublisher = messagePublisher;
 
-        _factory = new ConnectionFactory()
+
+        _rabbitFactory = new ConnectionFactory()
         {
             HostName = _appSettings.RabbitConn,
             UserName = "guest",
             Password = "guest"
         };
+        // _rabbitFactory = new ConnectionFactory();
+        // _rabbitFactory.Uri = new Uri("amqp://guest:guest@localhost:5672/");
 
-
-        // _factory = new ConnectionFactory();
-        // _factory.Uri = new Uri("amqp://guest:guest@localhost:5672/");
-
-
-        _connection = _factory.CreateConnection();
+        _connection = _rabbitFactory.CreateConnection();
 
         _channel = _connection.CreateModel();
 
@@ -76,24 +83,18 @@ public sealed class ConsumerWorker : BackgroundService
             Log.Information("Received message: {0}", message);
             Console.WriteLine(" [x] Received {0}", message);
 
-            // the splitter works by, reading a list from config an converting it to queueNames where other service can pick up the msg an do work
+            // As this is a stub as mentions in Program.cs work will be skipped 
             Task.Run(() =>
             {
                 Log.Information("Getting msg ready");
 
-                if (_appSettings.RabbitQueueNameProduceList != null)
-                {
-                    var count = _appSettings.RabbitQueueNameProduceList.Count();
-                    for (var a = 0; a <= count - 1; a += 1)
-                    {
-                        var queueName = _appSettings.RabbitQueueNameConsume + "." +
-                                        _appSettings.RabbitQueueNameProduceList[a];
-                        //TODO: update json message with count size so splits i known for the aggregator
-                        //TODO: DO actual splitter work on msg, do not send whole msg 
-                        _messagePublisher.SendMessage(message, queueName);
-                        Log.Information("Has send message: {string} onto {string}", message, queueName);
-                    }
-                }
+                var redisData = _redisDatabase.StringGet(_appSettings.RedisKey);
+                //TODO 
+                var trafficData = "THERE IS NO TRAFFIC (PlaceHolder Text) ";
+
+                var parkingMsg = $"{message} teset {redisData} {trafficData}";
+                _messagePublisher.SendMessage(parkingMsg);
+                Log.Information("Has send message: {string}", parkingMsg);
             });
         };
 

@@ -10,14 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e73ce90-519a-448e-acc8-70962140786c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Splitter/.idea/.idea.Splitter/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/RabbitMQs/IMessageProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Splitter/Splitter/util/AppSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/JSONModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/.idea/.idea.ParkingService/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/RabbitMQs/IMessageProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/RabbitMQs/RabbitMQProducer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ParkingService/ParkingService/util/AppSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Controllers/ParkingController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Controllers/ParkingController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ParkingAdsAPI/ParkingAdsAPI/Data/DataModels.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Splitter/Splitter/ConsumerWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Splitter/Splitter/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.pullAD/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -226,7 +229,7 @@
       <workItem from="1672825418220" duration="2581000" />
       <workItem from="1672838821586" duration="6732000" />
       <workItem from="1672908139711" duration="1197000" />
-      <workItem from="1672911370450" duration="1930000" />
+      <workItem from="1672911370450" duration="2548000" />
     </task>
     <servers />
   </component>
