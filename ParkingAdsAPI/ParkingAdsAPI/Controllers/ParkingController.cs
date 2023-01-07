@@ -15,14 +15,17 @@ namespace ParkingAdsAPI.Controllers
     public class ParkingController : ControllerBase
     {
         private readonly IMessageProducer _messagePublisher;
+        private readonly IMessageConsume _messageConsume;
 
         private readonly IConfiguration _config;
         private readonly AppSettings _appSettings;
 
 
-        public ParkingController(IMessageProducer messagePublisher, IOptionsMonitor<AppSettings> optionsMonitor)
+        public ParkingController(IMessageProducer messagePublisher, IMessageConsume messageConsume,
+            IOptionsMonitor<AppSettings> optionsMonitor)
         {
             _messagePublisher = messagePublisher;
+            _messageConsume = messageConsume;
             _appSettings = optionsMonitor.CurrentValue;
             //_config = config;
         }
@@ -37,7 +40,7 @@ namespace ParkingAdsAPI.Controllers
             var json = new JsonModel
             {
                 SearchedLocation = place,
-                TopicKey = _appSettings.RabbitQueueName,
+                TopicKey = _appSettings.RabbitQueueNameProduce,
 
                 // Sesssion = null,
                 Sesssion = new Sesssion
@@ -55,8 +58,11 @@ namespace ParkingAdsAPI.Controllers
 
             //TODO: call cache 
             //TODO: Await svar  og build return model 
+            //TODO: handle callback better 
+            var obj = await _messageConsume.GetMessage();
 
-            return Ok();
+
+            return Ok(obj);
         }
 
 

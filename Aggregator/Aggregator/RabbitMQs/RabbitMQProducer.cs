@@ -1,28 +1,36 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Text;
+using Aggregator.util;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using ParkingAdsAPI.Util;
 using RabbitMQ.Client;
 using Serilog;
-using System.Text;
 
-namespace ParkingAdsAPI.RabbitMQs
+namespace Aggregator.RabbitMQs
 {
-    public class RabbitMQProducer : IMessageProducer
+    public class RabbitMqProducer : IMessageProducer
     {
         private readonly AppSettings _appSettings;
 
-        public RabbitMQProducer(IOptionsMonitor<AppSettings> optionsMonitor)
+        public RabbitMqProducer(IOptionsMonitor<AppSettings> optionsMonitor)
         {
-            //_appSettings = new AppSettings();
-            //config.GetSection("ApiSettings").Bind(_appSettings);
             _appSettings = optionsMonitor.CurrentValue;
-
         }
+
         public void SendMessage<T>(T message)
         {
             Log.Information("Started producing");
+            Console.WriteLine(message);
             // TODO USE app settings
-            var factory = new ConnectionFactory { HostName = _appSettings.RabbitConn };
+            var factory = new ConnectionFactory
+            {
+                HostName = _appSettings.RabbitConn, 
+                UserName = "guest",
+                Password = "guest"
+            };
+            
+            // var factory = new ConnectionFactory();
+            // factory.Uri = new Uri("amqp://guest:guest@localhost:5672/");
+            //
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
             channel.QueueDeclare(queue: _appSettings.RabbitQueueNameProduce,
@@ -42,7 +50,7 @@ namespace ParkingAdsAPI.RabbitMQs
                 basicProperties: properties,
                 body: body);
             //TODO DO better log msg 
-            Log.Information(" [x] Sent {0}", message);
+            Log.Information(" RabbitMqProducer Sent {0}", message);
         }
     }
 }

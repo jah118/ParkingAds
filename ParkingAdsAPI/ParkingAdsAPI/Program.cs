@@ -32,6 +32,7 @@ builder.Host.UseSerilog();
 
 builder.Services.Configure<AppSettings>(configuration.GetSection("ApiSettings"));
 builder.Services.AddScoped<IMessageProducer, RabbitMQProducer>();
+builder.Services.AddScoped<IMessageConsume, RabbitMQConsume>();
 builder.Services.AddHttpContextAccessor();
 
 
