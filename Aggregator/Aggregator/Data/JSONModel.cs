@@ -1,5 +1,4 @@
-﻿namespace ParkingAdsAPI.Data;
-
+﻿namespace Aggregator.Data;
 /*
  * Convert this to class lib to be shared insted of this copy paste stuff 
  */
@@ -10,7 +9,7 @@ public class JsonModel
     public Sesssion? Sesssion { get; set; }
     public string? AdData { get; set; }
     public ParkingData? ParkingData { get; set; }
-    public TrafficData? TrafficData { get; set; }
+    public TrafficData? TrafficData  { get; set; }  
 }
 
 public class Sesssion
