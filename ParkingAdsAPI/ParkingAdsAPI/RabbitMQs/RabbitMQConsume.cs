@@ -65,11 +65,7 @@ public class RabbitMQConsume : IMessageConsume
             {
                 go = false;
             }
-            // channel.BasicAck(eventArgs.DeliveryTag, false);
-            
 
-
-            // Task.Yield();
         };
 
         channel.BasicConsume(queue: _appSettings.RabbitQueueNameConsume, autoAck: true, consumer: consumer);

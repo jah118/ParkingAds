@@ -27,7 +27,6 @@ namespace ParkingAdsAPI.Controllers
             _messagePublisher = messagePublisher;
             _messageConsume = messageConsume;
             _appSettings = optionsMonitor.CurrentValue;
-            //_config = config;
         }
 
 
@@ -42,7 +41,6 @@ namespace ParkingAdsAPI.Controllers
                 SearchedLocation = place,
                 TopicKey = _appSettings.RabbitQueueNameProduce,
 
-                // Sesssion = null,
                 Sesssion = new Sesssion
                 {
                     TimeSent = DateTime.Now.ToString(),
@@ -66,22 +64,22 @@ namespace ParkingAdsAPI.Controllers
         }
 
 
-        [HttpPost]
-        public async Task<IActionResult> BookParking([FromBody] ParkingDTO modelDTO)
-        {
-            ParkingModel model = new()
-            {
-                Data = modelDTO.Data,
-            };
-
-
-            _messagePublisher.SendMessage(model.Data);
-
-
-            //TODO: call cache 
-            //TODO: Await svar  og build return model 
-
-            return Ok(model);
-        }
+        // [HttpPost]
+        // public async Task<IActionResult> BookParking([FromBody] ParkingDTO modelDTO)
+        // {
+        //     ParkingModel model = new()
+        //     {
+        //         Data = modelDTO.Data,
+        //     };
+        //
+        //
+        //     _messagePublisher.SendMessage(model.Data);
+        //
+        //
+        //     //TODO: call cache 
+        //     //TODO: Await svar  og build return model 
+        //
+        //     return Ok(model);
+        // }
     }
 }
