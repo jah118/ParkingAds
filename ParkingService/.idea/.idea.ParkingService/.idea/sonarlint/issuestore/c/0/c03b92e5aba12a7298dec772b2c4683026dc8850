@@ -1,0 +1,5 @@
+
+csharpsquid:S1450"]Remove the field '_rabbitFactory' and declare it as a local variable in the relevant methods.(ç×Ôúÿÿÿÿ
+wcsharpsquid:S1450"URemove the field '_redis' and declare it as a local variable in the relevant methods.(¹š’«ùÿÿÿÿ
+@csharpsquid:S125-"Remove this commented out code.(Œ®›¸ûÿÿÿÿ
+Xcsharpsquid:S1135e"4Complete the task associated to this 'TODO' comment.(…ïœ†8‘ ¼Ø0

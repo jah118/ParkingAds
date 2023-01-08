@@ -1,0 +1,11 @@
+
+a
+1RedisConsumerParking/util/RedisConnectorHelper.cs,6\6\66ca86d6710b0eb30b3118fd91ade9f28fb32cd8
+O
+RedisConsumerParking/Program.cs,c\f\cfbbc9a8835b8f55314846b9c17bceb9647d5ebf
+c
+3RedisConsumerParking/ConsumerWorkerHandleParking.cs,5\e\5eba5337debf6d53ca22d1d7d71dcaaa41a24bac
+X
+(RedisConsumerParking/util/AppSettings.cs,c\f\cfcfdd5b8d3f7adee15c3a76da82db61cb3e9866
+U
+%RedisConsumerParking/appsettings.json,7\d\7d0701ba1b9fbde03b5efce018d197847fb17694

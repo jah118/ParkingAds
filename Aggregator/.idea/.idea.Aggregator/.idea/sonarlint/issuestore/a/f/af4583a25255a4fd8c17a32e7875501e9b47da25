@@ -1,0 +1,7 @@
+
+†csharpsquid:S1450"]Remove the field '_rabbitFactory' and declare it as a local variable in the relevant methods.(ç×Ôúÿÿÿÿ8›£¼½Ø0
+~csharpsquid:S1450"URemove the field '_redis' and declare it as a local variable in the relevant methods.(¹š’«ùÿÿÿÿ8¦³ÉäØ0
+xcsharpsquid:S4487"TRemove this unread private field '_queueName' or refactor the code to use its value.(‚æŸœ8¿ªãäØ0
+Gcsharpsquid:S125,"Remove this commented out code.(Œ®›¸ûÿÿÿÿ8›£¼½Ø0
+Bcsharpsquid:S125<"Remove this commented out code.(º×8ÀªãäØ0
+]csharpsquid:S1135b"4Complete the task associated to this 'TODO' comment.(ß†¯×üÿÿÿÿ8ÊÓßäØ0
